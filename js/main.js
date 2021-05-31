@@ -12,7 +12,7 @@ function getRandomInteger(numberLeft, numberRight) {
   }
   const randResult = numberLeft + Math.random() * (numberRight + 1 - numberLeft);
   return Math.floor(randResult);
-};
+}
 
 getRandomInteger(5,100);
 
@@ -20,7 +20,7 @@ function checkLengthLine(textLine, maxLength) {
   if(maxLength <= 0) {
     return null;
   }
-  return textLine.length <= maxLength ? true: false;
-};
+  return textLine.length <= maxLength;
+}
 
 checkLengthLine('Hello', 5);
