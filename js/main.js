@@ -31,8 +31,6 @@ function getRandomInteger(numberLeft, numberRight) {
   return Math.floor(randResult);
 }
 
-getRandomInteger(5,100);
-
 function checkLengthLine(textLine, maxLength) {
   if(maxLength <= 0) {
     return null;
@@ -54,9 +52,11 @@ function createComment (commentNumber) {
 function createComments () {
   const countComments = getRandomInteger(MIN_COMMENT_COUNT, MAX_COMMENT_COUNT);
   const comments = new Array(countComments).fill(null);
+
   for (let i = 0; i < countComments; i++) {
     comments[i] = createComment(i+1);
   }
+
   return comments;
 }
 
