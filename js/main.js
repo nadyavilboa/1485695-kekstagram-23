@@ -1,3 +1,2 @@
-import {createArrayPhotos} from './data-generation.js';
+import './picture-painting.js';
 
-createArrayPhotos();
