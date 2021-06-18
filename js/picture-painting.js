@@ -4,22 +4,22 @@ const dataCollection = createArrayPhotos(); //генерация данных
 
 const pictureBlock = document.querySelector('.pictures'); //Сюда будем вставлять готовые картинки
 
-const templatePicture = document.querySelector('#picture').content; //это шаблон картинки
+const pictureTemplate = document.querySelector('#picture').content; //это шаблон картинки
 
-const templatePictureLink = templatePicture.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
+const pictureTemplateLink = pictureTemplate.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
 
-function createFragment (dataLive) {
+function createFragment (data) {
   const fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < dataLive.length; i++) {
+  for (let i = 0; i < data.length; i++) {
 
-    const element = templatePictureLink.cloneNode(true);
+    const element = pictureTemplateLink.cloneNode(true);
     const pictureImg = element.children[0];
     const pictureInfo = element.children[1];
 
-    pictureImg.src = dataLive[i].url;
-    pictureInfo.children[0].textContent = dataLive[i].likes;
-    pictureInfo.children[1].textContent = dataLive[i].comments.length;
+    pictureImg.src = data[i].url;
+    pictureInfo.children[0].textContent = data[i].likes;
+    pictureInfo.children[1].textContent = data[i].comments.length;
 
     fragment.appendChild(element);
   }
