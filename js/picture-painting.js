@@ -4,22 +4,22 @@ const dataCollection = createArrayPhotos(); //генерация данных
 
 const pictureBlock = document.querySelector('.pictures'); //Сюда будем вставлять готовые картинки
 
-const templateFragment = document.querySelector('#picture').content; //это шаблон картинки
+const templatePicture = document.querySelector('#picture').content; //это шаблон картинки
 
-const template = templateFragment.querySelector('a'); //ссылка потомок шаблона, внутри которого нужные нам объекты
+const templatePictureLink = templatePicture.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
 
-function getFragment (datesLive) {
+function createFragment (dateLive) {
   const fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < datesLive.length; i++) {
+  for (let i = 0; i < dateLive.length; i++) {
 
-    const element = template.cloneNode(true);
+    const element = templatePictureLink.cloneNode(true);
     const pictureImg = element.children[0];
     const pictureInfo = element.children[1];
 
-    pictureImg.src = datesLive[i].url;
-    pictureInfo.children[0].textContent = datesLive[i].likes;
-    pictureInfo.children[1].textContent = datesLive[i].comments.length;
+    pictureImg.src = dateLive[i].url;
+    pictureInfo.children[0].textContent = dateLive[i].likes;
+    pictureInfo.children[1].textContent = dateLive[i].comments.length;
 
     fragment.appendChild(element);
   }
@@ -27,4 +27,4 @@ function getFragment (datesLive) {
   return fragment;
 }
 
-pictureBlock.appendChild(getFragment(dataCollection));
+pictureBlock.appendChild(createFragment(dataCollection));
