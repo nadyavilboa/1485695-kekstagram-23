@@ -8,18 +8,18 @@ const templatePicture = document.querySelector('#picture').content; //это ш�
 
 const templatePictureLink = templatePicture.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
 
-function createFragment (dateLive) {
+function createFragment (dataLive) {
   const fragment = document.createDocumentFragment();
 
-  for (let i = 0; i < dateLive.length; i++) {
+  for (let i = 0; i < dataLive.length; i++) {
 
     const element = templatePictureLink.cloneNode(true);
     const pictureImg = element.children[0];
     const pictureInfo = element.children[1];
 
-    pictureImg.src = dateLive[i].url;
-    pictureInfo.children[0].textContent = dateLive[i].likes;
-    pictureInfo.children[1].textContent = dateLive[i].comments.length;
+    pictureImg.src = dataLive[i].url;
+    pictureInfo.children[0].textContent = dataLive[i].likes;
+    pictureInfo.children[1].textContent = dataLive[i].comments.length;
 
     fragment.appendChild(element);
   }
