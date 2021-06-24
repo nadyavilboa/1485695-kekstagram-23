@@ -66,12 +66,12 @@ function printMessagesValidationHashtag() {
     inputHashtag.classList.add('input-error');
   }
 
-  else if (!resultCheckHashtags.allHashtagsCorrect) {
+  else if (!resultCheckHashtags.allHushtagsCorrect) {
     inputHashtag.setCustomValidity('Хэш-тег начинается с решётки, затем не менее 1, не более 20 символов: буквы и/или цифры');
     inputHashtag.classList.add('input-error');
   }
 
-  else if (!resultCheckHashtags.noHashtagMatches) {
+  else if (!resultCheckHashtags.noHastagMatches) {
     inputHashtag.setCustomValidity('Хэш-теги не должны повторяться. Строчные и прописные буквы не различаются');
     inputHashtag.classList.add('input-error');
   }
