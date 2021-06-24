@@ -29,10 +29,5 @@ function isEnterEvent(evt) {
   return evt.key === 'Enter';
 }
 
-function validateHashtag (hashtag) {
-  const re = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
-  return re.test(hashtag);
-}
-
-export {getRandomInteger, isEscapeEvent, isEnterEvent, validateHashtag, checkLengthLine};
+export {getRandomInteger, isEscapeEvent, isEnterEvent, checkLengthLine};
 
