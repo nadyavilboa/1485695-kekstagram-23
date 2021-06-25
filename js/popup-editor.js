@@ -3,6 +3,7 @@ import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandle
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 
 const body = document.querySelector('body');
+<<<<<<< HEAD
 
 //форма, собирающая все данные о загруженном изображении
 const formDownloadPicture = document.querySelector('#upload-select-image');
@@ -13,6 +14,26 @@ const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
 //окно редактора загруженной картинки
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
+=======
+const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
+const inputFilePicture = formDownloadPicture.querySelector('#upload-file'); //поле загрузки фото
+
+const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
+const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
+
+/*function closePopupIfEventEscape (evt) {
+  if(isEscapeEvent(evt) && !checkInputIsActive()) {
+    evt.preventDefault();
+    buttonCloseEditorClickHandler();
+  }
+}
+
+function buttonCloseEditorKeydownHandler (evt) {
+  if(isEnterEvent(evt)) {
+    buttonCloseEditorClickHandler();
+  }
+}*/
+>>>>>>> 8f8dc98 (исправляет названия обработчиков)
 
 function openPopup () {
   popupEditor.classList.remove('hidden');
