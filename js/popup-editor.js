@@ -8,20 +8,7 @@ const inputFilePicture = formDownloadPicture.querySelector('#upload-file'); //п
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
 
-function documentKeydownHandler (evt) {
-  if(isEscapeEvent(evt) && !checkInputIsActive()) {
-    evt.preventDefault();
-    buttonCloseEditorClickHandler();
-  }
-}
-
-function buttonCloseEditorKeydownHandler (evt) {
-  if(isEnterEvent(evt)) {
-    buttonCloseEditorClickHandler();
-  }
-}
-
-function inputFilePictureChangeHanlder () {
+function openPopup () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
 
@@ -32,7 +19,7 @@ function inputFilePictureChangeHanlder () {
   inputComment.addEventListener('input', inputCommentValidationHandler);
 }
 
-function buttonCloseEditorClickHandler () {
+function closePopup () {
   popupEditor.classList.add('hidden');
   body.classList.remove('modal-open');
 
@@ -45,6 +32,27 @@ function buttonCloseEditorClickHandler () {
 
   inputHashtag.removeEventListener('input', inputHashtagValidationHandler);
   inputComment.removeEventListener('input', inputCommentValidationHandler);
+}
+
+function documentKeydownHandler (evt) {
+  if(isEscapeEvent(evt) && !checkInputIsActive()) {
+    evt.preventDefault();
+    closePopup();
+  }
+}
+
+function buttonCloseEditorKeydownHandler (evt) {
+  if(isEnterEvent(evt)) {
+    closePopup();
+  }
+}
+
+function inputFilePictureChangeHanlder () {
+  openPopup();
+}
+
+function buttonCloseEditorClickHandler () {
+  closePopup();
 }
 
 inputFilePicture.addEventListener('change', inputFilePictureChangeHanlder);

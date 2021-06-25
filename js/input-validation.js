@@ -55,7 +55,7 @@ function checkHashtags () {
   };
 }
 
-function inputHashtagValidationHandler () {
+function printMessagesValidationHashtag() {
   const resultCheckHashtags = checkHashtags();
 
   if(!resultCheckHashtags.noTooMuchHastags) {
@@ -83,7 +83,7 @@ function inputHashtagValidationHandler () {
   inputHashtag.reportValidity();
 }
 
-function inputCommentValidationHandler () {
+function checkComment () {
   if(!checkLengthLine(inputComment.value, MAX_LENGTH_COMMENT)) {
     inputComment.setCustomValidity('Комментарий не может быть длинее 140 символов');
     inputComment.classList.add('input-error');
@@ -98,6 +98,14 @@ function inputCommentValidationHandler () {
   }
 
   inputComment.reportValidity();
+}
+
+function inputHashtagValidationHandler () {
+  printMessagesValidationHashtag();
+}
+
+function inputCommentValidationHandler () {
+  checkComment();
 }
 
 export { checkInputIsActive, inputHashtag, inputComment, inputHashtagValidationHandler, inputCommentValidationHandler };
