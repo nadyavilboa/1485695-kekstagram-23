@@ -21,6 +21,7 @@ const inputFilePicture = formDownloadPicture.querySelector('#upload-file'); //п
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
 
+<<<<<<< HEAD
 /*function closePopupIfEventEscape (evt) {
   if(isEscapeEvent(evt) && !checkInputIsActive()) {
     evt.preventDefault();
@@ -35,6 +36,8 @@ function buttonCloseEditorKeydownHandler (evt) {
 }*/
 >>>>>>> 8f8dc98 (исправляет названия обработчиков)
 
+=======
+>>>>>>> be927fd (использует обработчики и самостоятельные функции)
 function openPopup () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -86,6 +89,31 @@ function buttonCloseEditorClickHandler () {
   closePopup();
 }
 
+<<<<<<< HEAD
 inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);
+=======
+function documentKeydownHandler (evt) {
+  if(isEscapeEvent(evt) && !checkInputIsActive()) {
+    evt.preventDefault();
+    closePopup();
+  }
+}
+
+function buttonCloseEditorKeydownHandler (evt) {
+  if(isEnterEvent(evt)) {
+    closePopup();
+  }
+}
+
+function inputFilePictureChangeHanlder () {
+  openPopup();
+}
+
+function buttonCloseEditorClickHandler () {
+  closePopup();
+}
+
+inputFilePicture.addEventListener('change', inputFilePictureChangeHanlder);
+>>>>>>> be927fd (использует обработчики и самостоятельные функции)
 
 buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);

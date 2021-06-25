@@ -86,7 +86,7 @@ function printMessagesValidationHashtag() {
   inputHashtag.reportValidity();
 }
 
-function inputCommentValidationHandler () {
+function checkComment () {
   if(!checkLengthLine(inputComment.value, MAX_LENGTH_COMMENT)) {
     inputComment.setCustomValidity('Комментарий не может быть длиннее 140 символов');
     inputComment.classList.add('input-error');
@@ -103,12 +103,12 @@ function inputCommentValidationHandler () {
   inputComment.reportValidity();
 }
 
-function inputHashtagInputHandler () {
+function inputHashtagValidationHandler () {
   printMessagesValidationHashtag();
 }
 
-function inputCommentInputHandler () {
-  inputCommentValidationHandler();
+function inputCommentValidationHandler () {
+  checkComment();
 }
 
-export { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler };
+export { checkInputIsActive, inputHashtag, inputComment, inputHashtagValidationHandler, inputCommentValidationHandler };
