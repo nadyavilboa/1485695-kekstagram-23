@@ -1,38 +1,38 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-import { checkInputIsActive, inputHashtag, inputComment, printMessageValidationHastags, checkComment } from './input-validation.js';
+import { checkInputIsActive, inputHashtag, inputComment, inputHashtagValidationHandler, inputCommentValidationHandler } from './input-validation.js';
 
 const body = document.querySelector('body');
 const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
 const inputFilePicture = formDownloadPicture.querySelector('#upload-file'); //поле загрузки фото
-const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
 
+const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
 
-function closePopupIfEventEscape (evt) {
+function documentKeydownHandler (evt) {
   if(isEscapeEvent(evt) && !checkInputIsActive()) {
     evt.preventDefault();
-    closePopup();
+    buttonCloseEditorClickHandler();
   }
 }
 
-function closePopupIfEventEnter (evt) {
+function buttonCloseEditorKeydownHandler (evt) {
   if(isEnterEvent(evt)) {
-    closePopup();
+    buttonCloseEditorClickHandler();
   }
 }
 
-function openPopup () {
+function inputFilePictureChangeHanlder () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
 
-  document.addEventListener('keydown', closePopupIfEventEscape);
-  buttonCloseEditor.addEventListener('keydown', closePopupIfEventEnter);
+  document.addEventListener('keydown', documentKeydownHandler);
+  buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.addEventListener('input', printMessageValidationHastags);
-  inputComment.addEventListener('input', checkComment);
+  inputHashtag.addEventListener('input', inputHashtagValidationHandler);
+  inputComment.addEventListener('input', inputCommentValidationHandler);
 }
 
-function closePopup () {
+function buttonCloseEditorClickHandler () {
   popupEditor.classList.add('hidden');
   body.classList.remove('modal-open');
 
@@ -40,14 +40,13 @@ function closePopup () {
   inputHashtag.value = '';
   inputComment.value = '';
 
-  document.removeEventListener('keydown', closePopupIfEventEscape);
-  buttonCloseEditor.removeEventListener('keydown', closePopupIfEventEnter);
+  document.removeEventListener('keydown', documentKeydownHandler);
+  buttonCloseEditor.removeEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.removeEventListener('input', printMessageValidationHastags);
-  inputComment.removeEventListener('input', checkComment);
-  //функция closePopup() уже работает, значит уже можно удалить эти обработчики
+  inputHashtag.removeEventListener('input', inputHashtagValidationHandler);
+  inputComment.removeEventListener('input', inputCommentValidationHandler);
 }
 
-inputFilePicture.addEventListener('change', openPopup);
+inputFilePicture.addEventListener('change', inputFilePictureChangeHanlder);
 
-buttonCloseEditor.addEventListener('click', closePopup);
+buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);
