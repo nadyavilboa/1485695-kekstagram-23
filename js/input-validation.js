@@ -84,7 +84,7 @@ function printMessagesValidationHashtag() {
   inputHashtag.reportValidity();
 }
 
-function checkComment () {
+function inputCommentValidationHandler () {
   if(!checkLengthLine(inputComment.value, MAX_LENGTH_COMMENT)) {
     inputComment.setCustomValidity('Комментарий не может быть длиннее 140 символов');
     inputComment.classList.add('input-error');
@@ -106,7 +106,7 @@ function inputHashtagInputHandler () {
 }
 
 function inputCommentInputHandler () {
-  checkComment();
+  inputCommentValidationHandler();
 }
 
 export { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler };

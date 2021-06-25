@@ -7,20 +7,20 @@ import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 const body = document.querySelector('body');
 const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
 const inputFilePicture = formDownloadPicture.querySelector('#upload-file'); //поле загрузки фото
-const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
 
+const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
 
 /*function closePopupIfEventEscape (evt) {
   if(isEscapeEvent(evt) && !checkInputIsActive()) {
     evt.preventDefault();
-    closePopup();
+    buttonCloseEditorClickHandler();
   }
 }
 
-function closePopupIfEventEnter (evt) {
+function buttonCloseEditorKeydownHandler (evt) {
   if(isEnterEvent(evt)) {
-    closePopup();
+    buttonCloseEditorClickHandler();
   }
 }*/
 
