@@ -101,12 +101,12 @@ function checkComment () {
   inputComment.reportValidity();
 }
 
-function inputHashtagValidationHandler () {
+function hashtagInputHandler () {
   printMessagesValidationHashtag();
 }
 
-function inputCommentValidationHandler () {
+function commentInputHandler () {
   checkComment();
 }
 
-export { checkInputIsActive, inputHashtag, inputComment, inputHashtagValidationHandler, inputCommentValidationHandler };
+export { checkInputIsActive, inputHashtag, inputComment, hashtagInputHandler, commentInputHandler };
