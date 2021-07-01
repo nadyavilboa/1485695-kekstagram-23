@@ -16,6 +16,19 @@ const socialComments = document.querySelector('.social__comments');
 
 const buttonClosePhoto = document.querySelector('#picture-cancel');
 
+function documentKeydownHandler (evt) {
+  if(isEscapeEvent(evt)) {
+    evt.preventDefault();
+    closeFullPhoto();
+  }
+}
+
+function buttonClosePhotoKeydownHandler (evt) {
+  if(isEnterEvent(evt)) {
+    closeFullPhoto();
+  }
+}
+
 function makeTextInfo (photo) {
   likesCount.textContent = photo.likes;
   socialCaption.textContent = photo.description;
@@ -48,19 +61,6 @@ function closeFullPhoto() {
 
   document.removeEventListener('keydown', documentKeydownHandler);
   buttonClosePhoto.removeEventListener('keydown', buttonClosePhotoKeydownHandler);
-}
-
-function documentKeydownHandler (evt) {
-  if(isEscapeEvent(evt)) {
-    evt.preventDefault();
-    closeFullPhoto();
-  }
-}
-
-function buttonClosePhotoKeydownHandler (evt) {
-  if(isEnterEvent(evt)) {
-    closeFullPhoto();
-  }
 }
 
 export {openFullPhoto, closeFullPhoto };
