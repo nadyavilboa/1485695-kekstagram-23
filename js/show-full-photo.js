@@ -12,18 +12,10 @@ function picturesClickHandler (evt) {
 
 pictures.addEventListener('click', picturesClickHandler);
 
-<<<<<<< HEAD
 function buttonClosePhotoClickHandler (evt) {
-=======
-function buttonClosePhotoHandler (evt) {
->>>>>>> 8aef8a8 (Отрисовывает полноэкранное изображение)
   evt.preventDefault();
   closeFullPhoto();
 }
 
-<<<<<<< HEAD
 buttonClosePhoto.addEventListener('click', buttonClosePhotoClickHandler);
-=======
-buttonClosePhoto.addEventListener('click', buttonClosePhotoHandler);
->>>>>>> 8aef8a8 (Отрисовывает полноэкранное изображение)
 
