@@ -21,7 +21,7 @@ function checkHashtagMatchesRule (hashtag) {
 function checkHashtags () {
   if(inputHashtag.value === '') {
     return {
-      noTooMuchHastags: true,
+      noTooMuchHashtags: true,
       allHashtagsCorrect: true,
       noHashtagMatches: true,
     };
@@ -50,7 +50,7 @@ function checkHashtags () {
 
   }
   return {
-    noTooMuchHastags: noTooMuchHashtags,
+    noTooMuchHashtags: noTooMuchHashtags,
     allHashtagsCorrect: allHashtagsCorrect,
     noHashtagMatches: noHashtagMatches,
   };
@@ -59,17 +59,17 @@ function checkHashtags () {
 function printMessagesValidationHashtag() {
   const resultCheckHashtags = checkHashtags();
 
-  if(!resultCheckHashtags.noTooMuchHastags) {
+  if(!resultCheckHashtags.noTooMuchHashtags) {
     inputHashtag.setCustomValidity('Хэш-тегов должно быть не больше пяти');
     inputHashtag.classList.add('input-error');
   }
 
-  else if (!resultCheckHashtags.allHushtagsCorrect) {
+  else if (!resultCheckHashtags.allHashtagsCorrect) {
     inputHashtag.setCustomValidity('Хэш-тег начинается с решётки, затем не менее 1, не более 20 символов: буквы и/или цифры');
     inputHashtag.classList.add('input-error');
   }
 
-  else if (!resultCheckHashtags.noHastagMatches) {
+  else if (!resultCheckHashtags.noHashtagMatches) {
     inputHashtag.setCustomValidity('Хэш-теги не должны повторяться. Строчные и прописные буквы не различаются');
     inputHashtag.classList.add('input-error');
   }
