@@ -1,5 +1,10 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fc6fbe0 (Дорабатывает нейминг)
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 
 const body = document.querySelector('body');
@@ -22,6 +27,7 @@ const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); /
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*function closePopupIfEventEscape (evt) {
   if(isEscapeEvent(evt) && !checkInputIsActive()) {
     evt.preventDefault();
@@ -38,6 +44,8 @@ function buttonCloseEditorKeydownHandler (evt) {
 
 =======
 >>>>>>> be927fd (использует обработчики и самостоятельные функции)
+=======
+>>>>>>> fc6fbe0 (Дорабатывает нейминг)
 function openPopup () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -89,31 +97,6 @@ function buttonCloseEditorClickHandler () {
   closePopup();
 }
 
-<<<<<<< HEAD
 inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);
-=======
-function documentKeydownHandler (evt) {
-  if(isEscapeEvent(evt) && !checkInputIsActive()) {
-    evt.preventDefault();
-    closePopup();
-  }
-}
-
-function buttonCloseEditorKeydownHandler (evt) {
-  if(isEnterEvent(evt)) {
-    closePopup();
-  }
-}
-
-function inputFilePictureChangeHanlder () {
-  openPopup();
-}
-
-function buttonCloseEditorClickHandler () {
-  closePopup();
-}
-
-inputFilePicture.addEventListener('change', inputFilePictureChangeHanlder);
->>>>>>> be927fd (использует обработчики и самостоятельные функции)
 
 buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);
