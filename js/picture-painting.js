@@ -8,7 +8,7 @@ const pictureTemplate = document.querySelector('#picture').content; //это ш�
 
 const pictureTemplateLink = pictureTemplate.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
 
-function createFragment (data) {
+function createFragmentPhotos (data) {
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < data.length; i++) {
@@ -21,10 +21,13 @@ function createFragment (data) {
     pictureInfo.children[0].textContent = data[i].likes;
     pictureInfo.children[1].textContent = data[i].comments.length;
 
+    pictureImg.id = data[i].id;
     fragment.appendChild(element);
   }
 
   return fragment;
 }
 
-pictureBlock.appendChild(createFragment(dataCollection));
+pictureBlock.appendChild(createFragmentPhotos(dataCollection));
+
+export { dataCollection };
