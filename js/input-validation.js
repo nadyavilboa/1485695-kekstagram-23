@@ -1,6 +1,7 @@
 import { checkLengthLine } from './utils.js';
 
 const MAX_LENGTH_COMMENT = 140;
+const MAX_COUNT_HASHTAGS = 5;
 
 const formDownloadPicture = document.querySelector('#upload-select-image');
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
@@ -21,19 +22,19 @@ function checkHashtags () {
   if(inputHashtag.value === '') {
     return {
       noTooMuchHastags: true,
-      allHushtagsCorrect: true,
-      noHastagMatches: true,
+      allHashtagsCorrect: true,
+      noHashtagMatches: true,
     };
   }
   const hashtags = inputHashtag.value.split(' ');
-  const noTooMuchHastags = hashtags.length <= 5;
-  let allHushtagsCorrect = true;
-  let noHastagMatches = true;
+  const noTooMuchHashtags = hashtags.length <= MAX_COUNT_HASHTAGS;
+  let allHashtagsCorrect = true;
+  let noHashtagMatches = true;
 
   for(let i = 0; i < hashtags.length; i++) {
 
     if(!checkHashtagMatchesRule(hashtags[i])) {
-      allHushtagsCorrect = false;
+      allHashtagsCorrect = false;
     }
 
   }
@@ -42,16 +43,16 @@ function checkHashtags () {
     for(let j = i+1; j < hashtags.length; j++) {
 
       if(hashtags[i].toLowerCase() === hashtags[j].toLowerCase()) {
-        noHastagMatches = false;
+        noHashtagMatches = false;
       }
 
     }
 
   }
   return {
-    noTooMuchHastags: noTooMuchHastags,
-    allHushtagsCorrect: allHushtagsCorrect,
-    noHastagMatches: noHastagMatches,
+    noTooMuchHastags: noTooMuchHashtags,
+    allHashtagsCorrect: allHashtagsCorrect,
+    noHashtagMatches: noHashtagMatches,
   };
 }
 
@@ -100,12 +101,12 @@ function checkComment () {
   inputComment.reportValidity();
 }
 
-function inputHashtagValidationHandler () {
+function hashtagInputHandler () {
   printMessagesValidationHashtag();
 }
 
-function inputCommentValidationHandler () {
+function commentInputHandler () {
   checkComment();
 }
 
-export { checkInputIsActive, inputHashtag, inputComment, inputHashtagValidationHandler, inputCommentValidationHandler };
+export { checkInputIsActive, inputHashtag, inputComment, hashtagInputHandler, commentInputHandler };

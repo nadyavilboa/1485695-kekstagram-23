@@ -1,5 +1,5 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-import { checkInputIsActive, inputHashtag, inputComment, inputHashtagValidationHandler, inputCommentValidationHandler } from './input-validation.js';
+import { checkInputIsActive, inputHashtag, inputComment, hashtagInputHandler, commentInputHandler } from './input-validation.js';
 
 const body = document.querySelector('body');
 const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
@@ -15,8 +15,8 @@ function openPopup () {
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.addEventListener('input', inputHashtagValidationHandler);
-  inputComment.addEventListener('input', inputCommentValidationHandler);
+  inputHashtag.addEventListener('input', hashtagInputHandler);
+  inputComment.addEventListener('input', commentInputHandler);
 }
 
 function closePopup () {
@@ -30,8 +30,8 @@ function closePopup () {
   document.removeEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.removeEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.removeEventListener('input', inputHashtagValidationHandler);
-  inputComment.removeEventListener('input', inputCommentValidationHandler);
+  inputHashtag.removeEventListener('input', hashtagInputHandler);
+  inputComment.removeEventListener('input', commentInputHandler);
 }
 
 function documentKeydownHandler (evt) {
