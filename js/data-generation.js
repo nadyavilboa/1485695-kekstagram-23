@@ -56,4 +56,4 @@ function createArrayPhotos () {
   return photos;
 }
 
-export {createArrayPhotos};
+export { createArrayPhotos };

@@ -21,6 +21,13 @@ function checkLengthLine(textLine, maxLength) {
   return textLine.length <= maxLength;
 }
 
-checkLengthLine('Hello', 5);
+function isEscapeEvent(evt) {
+  return evt.key === 'Escape' || evt.key === 'Esc';
+}
 
-export {getRandomInteger};
+function isEnterEvent(evt) {
+  return evt.key === 'Enter';
+}
+
+export {getRandomInteger, isEscapeEvent, isEnterEvent, checkLengthLine};
+
