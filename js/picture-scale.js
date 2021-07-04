@@ -7,20 +7,23 @@ const scaleMin = 0.25;
 const scaleMax = 1;
 const inputScaleInitialValue = '100%';
 
+const indexLastSymbol = -1;
+const procentMultipler = 100;
+
 inputScale.value = inputScaleInitialValue;
 
 let currentScale = getNumberScale(inputScale.value);
 
 function getNumberScale (stringProcent) {
-  const numberProcent = Number(stringProcent.slice(0,-1));
-  return numberProcent / 100;
+  const numberProcent = Number(stringProcent.slice(0, indexLastSymbol));
+  return numberProcent / procentMultipler;
 }
 
 function changeScale (newNumberScale) {
   imgUploadPreview.style.transform = `scale(${newNumberScale})`;
 
-  newNumberScale = newNumberScale * 100;
-  const newStringScale = `${newNumberScale.toString()  }%`;
+  newNumberScale = newNumberScale * procentMultipler;
+  const newStringScale = `${newNumberScale.toString()}%`;
   inputScale.value =  newStringScale;
 
   currentScale = getNumberScale(newStringScale);
