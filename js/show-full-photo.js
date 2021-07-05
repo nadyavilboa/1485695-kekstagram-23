@@ -12,10 +12,10 @@ function picturesClickHandler (evt) {
 
 pictures.addEventListener('click', picturesClickHandler);
 
-function buttonClosePhotoHandler (evt) {
+function buttonClosePhotoClickHandler (evt) {
   evt.preventDefault();
   closeFullPhoto();
 }
 
-buttonClosePhoto.addEventListener('click', buttonClosePhotoHandler);
+buttonClosePhoto.addEventListener('click', buttonClosePhotoClickHandler);
 
