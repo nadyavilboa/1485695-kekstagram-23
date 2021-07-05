@@ -14,7 +14,7 @@ const scaleInitial = 1;
 const inputScaleInitialValue = '100%';
 const saturateInitial = '100%';
 
-const imageEffects = ['effects__preview--chrome','effects__preview--sepia','effects__preview--marvin','effects__preview--phobos','effects__preview--heat'];
+const imageEffects = ['effects__preview--none','effects__preview--chrome','effects__preview--sepia','effects__preview--marvin','effects__preview--phobos','effects__preview--heat'];
 
 function removeClassesImageEffects () {
   for (let i = 0; i < imageEffects.length; i++) {
