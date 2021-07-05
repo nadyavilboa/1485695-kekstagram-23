@@ -1,4 +1,5 @@
 import { removeClassesImageEffects } from './initial-effects.js';
+import './effects-slider.js';
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
 
