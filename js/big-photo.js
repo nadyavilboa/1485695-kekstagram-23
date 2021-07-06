@@ -35,10 +35,7 @@ function makeTextInfo (photo) {
   likesCount.textContent = photo.likes;
   socialCaption.textContent = photo.description;
 
-  socialCommentsCount.classList.add('hidden');
   commentsCount.textContent = photo.comments.length;
-
-  commentsLoader.classList.add('hidden');
 
   socialComments.appendChild(createFragmentComments(photo));
 }

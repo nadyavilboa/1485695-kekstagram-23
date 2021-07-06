@@ -1,18 +1,8 @@
-const socialComments = document.querySelector('.social__comments');
-
 const commentTemplate = document.querySelector('#comment').content; //шаблон комментария
 
 const commentTemplateListElement = commentTemplate.querySelector('.social__comment'); //элемент списка комментариев, потомок шаблона
 
-function cleanListComments () {
-  while (socialComments.firstChild) {
-    socialComments.removeChild(socialComments.firstChild);
-  }
-}
-
 function createFragmentComments (data) {
-  cleanListComments(); //очистка списка комментариев
-
   const comments = data.comments; //это комментарии для вставки
 
   const fragment = document.createDocumentFragment();
