@@ -1,5 +1,5 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-import { checkInputIsActive, inputHashtag, inputComment, hashtagInputHandler, commentInputHandler } from './input-validation.js';
+import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
 
 const body = document.querySelector('body');
 const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
@@ -15,8 +15,8 @@ function openPopup () {
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.addEventListener('input', hashtagInputHandler);
-  inputComment.addEventListener('input', commentInputHandler);
+  inputHashtag.addEventListener('input', inputHashtagInputHandler);
+  inputComment.addEventListener('input', inputCommentInputHandler);
 }
 
 function closePopup () {
@@ -30,8 +30,8 @@ function closePopup () {
   document.removeEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.removeEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.removeEventListener('input', hashtagInputHandler);
-  inputComment.removeEventListener('input', commentInputHandler);
+  inputHashtag.removeEventListener('input', inputHashtagInputHandler);
+  inputComment.removeEventListener('input', inputCommentInputHandler);
 }
 
 function documentKeydownHandler (evt) {
@@ -47,7 +47,7 @@ function buttonCloseEditorKeydownHandler (evt) {
   }
 }
 
-function inputFilePictureChangeHanlder () {
+function inputFilePictureChangeHandler () {
   openPopup();
 }
 
@@ -55,6 +55,6 @@ function buttonCloseEditorClickHandler () {
   closePopup();
 }
 
-inputFilePicture.addEventListener('change', inputFilePictureChangeHanlder);
+inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);
 
 buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);
