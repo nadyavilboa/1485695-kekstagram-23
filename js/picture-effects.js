@@ -2,15 +2,20 @@ import { removeClassesImageEffects } from './initial-effects.js';
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
 
-const indexEffectName = 7; //в строке id эффекта название эффекта начинается с 7 символа
-
 const sliderElement = document.querySelector('.effect-level__slider');
 const inputLevelEffect = document.querySelector('.effect-level__value');
+
+const INDEX_EFFECT_NAME = 7; //в строке id эффекта название эффекта начинается с 7 символа
+
+const PROCENT_COEFFICIENT = 100;
+const COUNT_PIXELS_MAX_BLUR = 3;
+const MIN_BRIGHT_VALUE = 1;
+const BRIGHT_MULTIPLER = 2;
 
 let effectId = 'effect-none';
 
 function getStandartLevelValue (levelEffect) {
-  return (levelEffect / 100).toFixed(1);
+  return (levelEffect / PROCENT_COEFFICIENT).toFixed(1);
 }
 
 function getMarvinLevelValue (levelEffect) {
@@ -20,7 +25,7 @@ function getMarvinLevelValue (levelEffect) {
 }
 
 function getPhobosLevelValue (levelEffect) {
-  let phobosLev = levelEffect * 3 / 100;
+  let phobosLev = levelEffect * COUNT_PIXELS_MAX_BLUR / PROCENT_COEFFICIENT;
   phobosLev = phobosLev.toFixed(1);
   let phobosLevString = phobosLev.toString();
   phobosLevString += 'px';
@@ -28,7 +33,7 @@ function getPhobosLevelValue (levelEffect) {
 }
 
 function getHeatLevelValue (levelEffect) {
-  const heatLev = (levelEffect / 100) * 2 + 1;
+  const heatLev = (levelEffect / PROCENT_COEFFICIENT) * BRIGHT_MULTIPLER + MIN_BRIGHT_VALUE;
   return heatLev.toFixed(1);
 }
 
@@ -98,7 +103,7 @@ function initImageEffect (effect) {
     sliderElement.noUiSlider.set(0);
   }
 
-  const effectName = effectId.slice(indexEffectName);
+  const effectName = effectId.slice(INDEX_EFFECT_NAME);
   const imgClassName = `effects__preview--${effectName}`;
 
   imgUploadPreview.classList.add(imgClassName);

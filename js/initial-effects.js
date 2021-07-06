@@ -10,9 +10,9 @@ const inputImgEffects = imgUploadOverlay.querySelectorAll('.effects__radio');
 
 const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
 
-const scaleInitial = 1;
-const inputScaleInitialValue = '100%';
-const saturateInitial = '100%';
+const SCALE_INITIAL = 1;
+const INPUT_SCALE_INITIAL_VALUE = '100%';
+const SATURATE_INITIAL = '100%';
 
 const imageEffects = ['effects__preview--none','effects__preview--chrome','effects__preview--sepia','effects__preview--marvin','effects__preview--phobos','effects__preview--heat'];
 
@@ -25,8 +25,8 @@ function removeClassesImageEffects () {
 }
 
 function setInitialScale () {
-  imgUploadPreview.style.transform = `scale(${scaleInitial})`;
-  inputScale.value = inputScaleInitialValue;
+  imgUploadPreview.style.transform = `scale(${SCALE_INITIAL})`;
+  inputScale.value = INPUT_SCALE_INITIAL_VALUE;
 
   buttonScaleSmaller.addEventListener('click', buttonScaleSmallerClickHandler);
   buttonScaleBigger.addEventListener('click', buttonScaleBiggerClickHandler);
@@ -34,7 +34,7 @@ function setInitialScale () {
 
 function setInitialEffects () {
   removeClassesImageEffects ();
-  imgUploadPreview.style.filter = `saturate(${saturateInitial})`;
+  imgUploadPreview.style.filter = `saturate(${SATURATE_INITIAL})`;
 }
 
 function setInitialSetting () {
