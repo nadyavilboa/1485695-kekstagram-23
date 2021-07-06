@@ -2,7 +2,6 @@ import { isEnterEvent, isEscapeEvent } from './utils.js';
 
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
 
-
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 
 const body = document.querySelector('body');
