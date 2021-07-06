@@ -901,28 +901,28 @@ main {
   }
 
   .effects__preview--chrome {
-    -webkit-filter: grayscale(1);
-            filter: grayscale(1);
+    -webkit-filter: grayscale(0);
+            filter: grayscale(0);
   }
 
   .effects__preview--sepia {
-    -webkit-filter: sepia(1);
-            filter: sepia(1);
+    -webkit-filter: sepia(0);
+            filter: sepia(0);
   }
 
   .effects__preview--marvin {
-    -webkit-filter: invert(100%);
-            filter: invert(100%);
+    -webkit-filter: invert(0%);
+            filter: invert(0%);
   }
 
   .effects__preview--phobos {
-    -webkit-filter: blur(3px);
-            filter: blur(3px);
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
   }
 
   .effects__preview--heat {
-    -webkit-filter: brightness(3);
-            filter: brightness(3);
+    -webkit-filter: brightness(1);
+            filter: brightness(1);
   }
 
 

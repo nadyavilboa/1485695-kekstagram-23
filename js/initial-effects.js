@@ -22,17 +22,27 @@ function removeClassesImageEffects () {
       imgUploadPreview.classList.remove(imageEffects[i]);
     }
   }
-  imgUploadPreview.style.filter = `saturate(${saturateInitial})`;
 }
 
-function setInitialEffects () {
+function setInitialScale () {
   imgUploadPreview.style.transform = `scale(${scaleInitial})`;
   inputScale.value = inputScaleInitialValue;
 
-  removeClassesImageEffects ();
-
   buttonScaleSmaller.addEventListener('click', buttonScaleSmallerClickHandler);
   buttonScaleBigger.addEventListener('click', buttonScaleBiggerClickHandler);
+}
+
+function setInitialEffects () {
+  removeClassesImageEffects ();
+  imgUploadPreview.style.filter = `saturate(${saturateInitial})`;
+}
+
+function setInitialSetting () {
+  //задаёт необходимые настройки масштаба, эффектов, обработчиков, когда открылось окно редактора
+
+  setInitialScale();
+
+  setInitialEffects();
 
   for(let i = 0; i < inputImgEffects.length; i++) {
     inputImgEffects[i].addEventListener('click', imgUploadEffectsClickHandler);
@@ -48,4 +58,4 @@ function removeEffectsHandlers () {
   }
 }
 
-export { setInitialEffects, removeEffectsHandlers, removeClassesImageEffects };
+export { setInitialSetting, removeEffectsHandlers, removeClassesImageEffects };

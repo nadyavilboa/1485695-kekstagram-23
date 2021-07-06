@@ -2,95 +2,100 @@ import { removeClassesImageEffects } from './initial-effects.js';
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
 
-const indexEffectName = 7; // в строке id эффекта первый символ имени эффекта имеет индекс 7
+const indexEffectName = 7; //в строке id эффекта название эффекта начинается с 7 символа
 
 const sliderElement = document.querySelector('.effect-level__slider');
 const inputLevelEffect = document.querySelector('.effect-level__value');
 
-function changeLevelEffect (effectId) {
-  imgUploadPreview.style.filter = '';
-  const levelEffect = inputLevelEffect.value;
+let effectId = 'effect-none';
+
+function getStandartLevelValue (levelEffect) {
+  return (levelEffect / 100).toFixed(1);
+}
+
+function getMarvinLevelValue (levelEffect) {
+  let marvinLev = levelEffect.toString();
+  marvinLev += '%';
+  return marvinLev;
+}
+
+function getPhobosLevelValue (levelEffect) {
+  let phobosLev = levelEffect * 3 / 100;
+  phobosLev = phobosLev.toFixed(1);
+  let phobosLevString = phobosLev.toString();
+  phobosLevString += 'px';
+  return phobosLevString;
+}
+
+function getHeatLevelValue (levelEffect) {
+  const heatLev = (levelEffect / 100) * 2 + 1;
+  return heatLev.toFixed(1);
+}
+
+function changeLevelEffect (levelEffect) {
 
   switch (effectId) {
+
     case 'effect-chrome':
-      imgUploadPreview.style.filter = `grayscale(${levelEffect})`;
+      inputLevelEffect.value = getStandartLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `grayscale(${getStandartLevelValue(levelEffect)})`;
       break;
+
     case 'effect-sepia':
-      imgUploadPreview.style.filter = `sepia(${levelEffect})`;
+      inputLevelEffect.value = getStandartLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `sepia(${getStandartLevelValue(levelEffect)})`;
       break;
+
     case 'effect-marvin':
-      imgUploadPreview.style.filter = `invert(${levelEffect}%)`;
+      inputLevelEffect.type = 'text';
+      inputLevelEffect.value = getMarvinLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `invert(${getMarvinLevelValue(levelEffect)})`;
       break;
+
     case 'effect-phobos':
-      imgUploadPreview.style.filter = `blur(${levelEffect}px)`;
+      inputLevelEffect.type = 'text';
+      inputLevelEffect.value = getPhobosLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `blur(${getPhobosLevelValue(levelEffect)})`;
       break;
+
     case 'effect-heat':
-      imgUploadPreview.style.filter = `brightness(${levelEffect})`;
+      inputLevelEffect.value = getHeatLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `brightness(${getHeatLevelValue(levelEffect)})`;
+      break;
+
+    default:
+      break;
   }
 }
 
-function createSliderElement (effectId) {
+function createSliderElement () {
   noUiSlider.create(sliderElement, {
     range: {
       min: 0,
-      max: 1,
+      max: 100,
     },
     start: 0,
-    step: 0.1,
+    step: 1,
     connect: 'lower',
   });
 
-  updateSliderElement(effectId);
-
   sliderElement.noUiSlider.on('update', sliderElementUpdate);
 
-  //changeLevelEffect(effectId);
 }
 
-function updateSliderElement(effectId) {
-  switch(effectId) {
-    case 'effect-marvin':
-      sliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 100,
-        },
-        start: 0,
-        step: 1,
-      });
-      break;
-    case 'effect-phobos':
-      sliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 3,
-        },
-        start: 0,
-        step: 0.1,
-      });
-      break;
-    case 'effect-heat':
-      sliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 1,
-          max: 3,
-        },
-        start: 0,
-        step: 0.1,
-      });
-      break;
-  }
-}
+function initImageEffect (effect) {
+  effectId = effect.getAttribute('id');
 
-function changeImageEffect (effect) {
-  removeClassesImageEffects();
-  imgUploadPreview.style.removeProperty('filter');
-  const effectId = effect.getAttribute('id');
-
-  if(effectId !== 'effect-none') {
-    createSliderElement(effectId);
-  } else {
+  if (effectId === 'effect-none' && sliderElement.hasChildNodes()) {
     sliderElement.noUiSlider.destroy();
+  }
+
+  if(effectId !== 'effect-none' && !sliderElement.hasChildNodes()) {
+    createSliderElement(effectId);
+  }
+
+  if(effectId !== 'effect-none' && sliderElement.hasChildNodes()) {
+    sliderElement.noUiSlider.set(0);
   }
 
   const effectName = effectId.slice(indexEffectName);
@@ -100,11 +105,21 @@ function changeImageEffect (effect) {
 }
 
 function sliderElementUpdate (_, handle, unencoded) {
-  inputLevelEffect.value = unencoded[handle];
+  const levelEffect = unencoded[handle];
+  changeLevelEffect(levelEffect);
+}
+
+function updateInitialSetting () {
+  //делает сброс параметров при выборе нового эффекта
+
+  removeClassesImageEffects();
+  imgUploadPreview.style.removeProperty('filter');
+  inputLevelEffect.value = '';
 }
 
 function imgUploadEffectsClickHandler (evt) {
-  changeImageEffect(evt.target);
+  updateInitialSetting();
+  initImageEffect(evt.target);
 }
 
 export { imgUploadEffectsClickHandler };

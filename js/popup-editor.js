@@ -1,10 +1,8 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-<<<<<<< HEAD
+
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
-=======
-import { checkInputIsActive, inputHashtag, inputComment, hashtagInputHandler, commentInputHandler } from './input-validation.js';
-import { setInitialEffects, removeEffectsHandlers } from './initial-effects.js';
->>>>>>> 0bf490e (file1)
+
+import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 
 const body = document.querySelector('body');
 const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
@@ -18,7 +16,7 @@ function openPopup () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
 
-  setInitialEffects();
+  setInitialSetting();
 
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
