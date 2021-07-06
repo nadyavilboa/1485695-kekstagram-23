@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //модальное окно с фото и информацией о нем
 const blockBigPicture = document.querySelector('.big-picture');
 
@@ -5,11 +6,15 @@ const blockBigPicture = document.querySelector('.big-picture');
 const blockCommentsCount = blockBigPicture.querySelector('.social__comment-count');
 const allCommentsCount = blockCommentsCount.querySelector('.comments-count');
 const printedCommentsCount = blockCommentsCount.querySelector('.printed-comments');
+=======
+const commentTemplate = document.querySelector('#comment').content; //шаблон комментария
+>>>>>>> 2423493 (check mistakes)
 
 const listComments = document.querySelector('.social__comments');
 const buttonShowComments = blockBigPicture.querySelector('.social__comments-loader');
 const inputComment = blockBigPicture.querySelector('.social__footer-text');
 
+<<<<<<< HEAD
 //шаблон комментария
 const commentTemplate = document.querySelector('#comment').content;
 
@@ -64,6 +69,10 @@ function showComments() {
     buttonShowComments.style.display = 'none';
   }
 }
+=======
+function createFragmentComments (data) {
+  const comments = data.comments; //это комментарии для вставки
+>>>>>>> 2423493 (check mistakes)
 
 function setComments(photo) {
   photoData = photo;
