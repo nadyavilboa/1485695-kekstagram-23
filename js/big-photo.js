@@ -16,7 +16,6 @@ const commentsLoader = blockBigPicture.querySelector('.comments-loader'); //кн
 
 const inputComment = blockBigPicture.querySelector('.social__footer-text'); //поле ввода комментария
 
-const buttonClosePhoto = document.querySelector('#picture-cancel');
 
 function documentKeydownHandler (evt) {
   if(isEscapeEvent(evt)) {
@@ -31,12 +30,17 @@ function buttonClosePhotoKeydownHandler (evt) {
   }
 }
 
+function buttonDownloadCommentsClickHandler () {
+  console.log('Нужно больше комментариев');
+}
+
 function makeTextInfo (photo) {
   likesCount.textContent = photo.likes;
   socialCaption.textContent = photo.description;
 
   commentsCount.textContent = photo.comments.length;
 
+  buttonDownloadComments.addEventListener('click', buttonDownloadCommentsClickHandler);
   socialComments.appendChild(createFragmentComments(photo));
 }
 
