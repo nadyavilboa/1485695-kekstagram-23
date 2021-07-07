@@ -86,7 +86,7 @@ function printMessagesValidationHashtag() {
 
 function checkComment () {
   if(!checkLengthLine(inputComment.value, MAX_LENGTH_COMMENT)) {
-    inputComment.setCustomValidity('Комментарий не может быть длинее 140 символов');
+    inputComment.setCustomValidity('Комментарий не может быть длиннее 140 символов');
     inputComment.classList.add('input-error');
   }
 

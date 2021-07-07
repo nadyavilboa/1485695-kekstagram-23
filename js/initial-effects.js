@@ -1,5 +1,5 @@
 import { buttonScaleSmallerClickHandler, buttonScaleBiggerClickHandler } from './picture-scale.js';
-import { imgUploadEffectsClickHandler } from './picture-effects.js';
+import { inputImgEffectsClickHandler } from './picture-effects.js';
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 
 const buttonScaleSmaller = imgUploadOverlay.querySelector('.scale__control--smaller');
@@ -45,7 +45,7 @@ function setInitialSetting () {
   setInitialEffects();
 
   for(let i = 0; i < inputImgEffects.length; i++) {
-    inputImgEffects[i].addEventListener('click', imgUploadEffectsClickHandler);
+    inputImgEffects[i].addEventListener('click', inputImgEffectsClickHandler);
   }
 }
 
@@ -54,7 +54,7 @@ function removeEffectsHandlers () {
   buttonScaleBigger.removeEventListener('click', buttonScaleBiggerClickHandler);
 
   for(let i = 0; i < inputImgEffects.length; i++) {
-    inputImgEffects[i].removeEventListener('click', imgUploadEffectsClickHandler);
+    inputImgEffects[i].removeEventListener('click', inputImgEffectsClickHandler);
   }
 }
 
