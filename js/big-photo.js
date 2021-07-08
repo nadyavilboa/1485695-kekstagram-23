@@ -40,7 +40,6 @@ function makeTextInfo (photo) {
 
   commentsCount.textContent = photo.comments.length;
 
-  buttonDownloadComments.addEventListener('click', buttonDownloadCommentsClickHandler);
   socialComments.appendChild(createFragmentComments(photo));
 }
 
@@ -56,6 +55,7 @@ function openFullPhoto (image) {
 
   inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);
+  buttonDownloadComments.addEventListener('click', buttonDownloadCommentsClickHandler);
   buttonClosePhoto.addEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 
@@ -64,6 +64,7 @@ function closeFullPhoto() {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', documentKeydownHandler);
+  buttonDownloadComments.removeEventListener('click', buttonDownloadCommentsClickHandler);
   buttonClosePhoto.removeEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 
