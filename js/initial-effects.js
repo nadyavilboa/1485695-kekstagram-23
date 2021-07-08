@@ -7,6 +7,7 @@ const buttonScaleBigger = imgUploadOverlay.querySelector('.scale__control--bigge
 const inputScale = imgUploadOverlay.querySelector('.scale__control--value');
 
 const inputImgEffects = imgUploadOverlay.querySelectorAll('.effects__radio');
+const blockSlider = document.querySelector('.img-upload__effect-level');
 
 const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
 
@@ -37,6 +38,7 @@ function setInitialScale () {
 function setInitialEffects () {
   removeClassesImageEffects ();
   imgUploadPreview.style.filter = `saturate(${SATURATE_INITIAL})`;
+  blockSlider.style.opacity = 0;
 }
 
 function setInitialSetting () {

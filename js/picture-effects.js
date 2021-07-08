@@ -2,8 +2,9 @@ import { removeClassesImageEffects } from './initial-effects.js';
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
 
-const sliderElement = document.querySelector('.effect-level__slider');
-const inputLevelEffect = document.querySelector('.effect-level__value');
+const blockSlider = document.querySelector('.img-upload__effect-level');
+const inputLevelEffect = blockSlider.querySelector('.effect-level__value');
+const sliderElement = blockSlider.querySelector('.effect-level__slider');
 
 const EffectConstants = {
   INDEX_EFFECT_NAME: 7,     //в строке id эффекта название эффекта начинается с 7 символа
@@ -91,10 +92,12 @@ function initImageEffect (effect) {
   effectId = effect.getAttribute('id');
 
   if (effectId === 'effect-none' && sliderElement.hasChildNodes()) {
+    blockSlider.style.opacity = 0;
     sliderElement.noUiSlider.destroy();
   }
 
   if(effectId !== 'effect-none' && !sliderElement.hasChildNodes()) {
+    blockSlider.style.opacity = 1;
     createSliderElement(effectId);
   }
 
