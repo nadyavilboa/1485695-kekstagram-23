@@ -47,6 +47,7 @@ function openFullPhoto (image) {
 
   inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);
+  buttonShowComments.addEventListener('click', buttonShowCommentsClickHandler);
   buttonClosePhoto.addEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 
