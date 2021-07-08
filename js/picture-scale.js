@@ -1,6 +1,9 @@
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const inputScale = imgUploadOverlay.querySelector('.scale__control--value');
-const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
+const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview');
+
+const buttonScaleSmaller = imgUploadOverlay.querySelector('.scale__control--smaller');
+const buttonScaleBigger = imgUploadOverlay.querySelector('.scale__control--bigger');
 
 const ScaleConstants = {
   SCALE_STEP: 0.25,
@@ -24,13 +27,24 @@ function changeScale (newNumberScale) {
 
   newNumberScale = newNumberScale * ScaleConstants.PERCENT_COEFFICIENT;
   const newStringScale = `${newNumberScale.toString()}%`;
-  inputScale.value =  newStringScale;
+  inputScale.value =  newStringScale; //значение масштаба в поле ввода
 
   currentScale = getNumberScale(newStringScale);
+
+  if (currentScale === ScaleConstants.SCALE_MIN) {
+    buttonScaleSmaller.setAttribute('disabled', 'disabled');
+  }
+
+  if (currentScale === ScaleConstants.SCALE_MAX) {
+    buttonScaleBigger.setAttribute('disabled','disabled');
+  }
 }
 
 function reduceScale () {
   if (currentScale > ScaleConstants.SCALE_MIN) {
+    if(buttonScaleBigger.hasAttribute('disabled')) {
+      buttonScaleBigger.removeAttribute('disabled');
+    }
     const newNumberScale = currentScale - ScaleConstants.SCALE_STEP;
     changeScale(newNumberScale);
   }
@@ -38,6 +52,9 @@ function reduceScale () {
 
 function enlargeScale () {
   if (currentScale < ScaleConstants.SCALE_MAX) {
+    if(buttonScaleSmaller.hasAttribute('disabled')) {
+      buttonScaleSmaller.removeAttribute('disabled');
+    }
     const newNumberScale = currentScale + ScaleConstants.SCALE_STEP;
     changeScale(newNumberScale);
   }

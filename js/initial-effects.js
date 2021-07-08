@@ -28,6 +28,8 @@ function setInitialScale () {
   imgUploadPreview.style.transform = `scale(${SCALE_INITIAL})`;
   inputScale.value = INPUT_SCALE_INITIAL_VALUE;
 
+  buttonScaleBigger.setAttribute('disabled', 'disabled');
+
   buttonScaleSmaller.addEventListener('click', buttonScaleSmallerClickHandler);
   buttonScaleBigger.addEventListener('click', buttonScaleBiggerClickHandler);
 }
