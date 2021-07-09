@@ -3,16 +3,18 @@ import { dataCollection } from './picture-painting.js';
 import { createFragmentComments } from './social-comments.js';
 const body = document.querySelector('body');
 
-const blockBigPicture = document.querySelector('.big-picture');
+const blockBigPicture = document.querySelector('.big-picture'); //модальное окно фотографии
 const bigPicture = blockBigPicture.querySelector('.big-picture__img').children[0];
 const likesCount = blockBigPicture.querySelector('.likes-count');
+const socialCaption = blockBigPicture.querySelector('.social__caption'); //описание фотографии
 
-const socialCommentsCount = blockBigPicture.querySelector('.social__comment-count');
-const commentsCount = socialCommentsCount.querySelector('.comments-count');
-const socialCaption = blockBigPicture.querySelector('.social__caption');
-const commentsLoader = blockBigPicture.querySelector('.comments-loader');
+const socialCommentsCount = blockBigPicture.querySelector('.social__comment-count'); //блок информации о комментариях
+const commentsCount = socialCommentsCount.querySelector('.comments-count'); //общее количество комментариев
+const socialComments = document.querySelector('.social__comments'); //список комментариев
 
-const socialComments = document.querySelector('.social__comments');
+const commentsLoader = blockBigPicture.querySelector('.comments-loader'); //кнопка загрузки комментариев
+
+const inputComment = blockBigPicture.querySelector('.social__footer-text'); //поле ввода комментария
 
 const buttonClosePhoto = document.querySelector('#picture-cancel');
 
@@ -51,6 +53,7 @@ function openFullPhoto (image) {
   bigPicture.src = pictureDataCollection.url;
   makeTextInfo(pictureDataCollection);
 
+  inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);
   buttonClosePhoto.addEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
