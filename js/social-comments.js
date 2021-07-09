@@ -98,6 +98,7 @@ function setComments(photo) {
     const elementCountComments = countComments.toString();
     printedCommentsCount.textContent = elementCountComments;
   }
+<<<<<<< HEAD
 
   //поле ввода блокируем - не используется
   inputComment.setAttribute('disabled', 'disabled');
@@ -108,6 +109,9 @@ function insertComments (data, countCommentsForPrinting) {
   const comments = data.comments;
 
   for(let i = 0; i < countCommentsForPrinting; i++) {
+=======
+  for(let i = 0; i < commentCount; i++) {
+>>>>>>> fd7be17 (промежуточный результат)
 
     const element = commentTemplateListElement.cloneNode(true);
     const commentAvatar = element.children[0];
