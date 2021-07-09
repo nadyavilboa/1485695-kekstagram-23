@@ -11,12 +11,12 @@ const EffectConstants = {
   PERCENT_COEFFICIENT: 100,
   COUNT_PIXELS_MAX_BLUR: 3,
   MIN_BRIGHT_VALUE: 1,
-  BRIGHT_MULTIPLER: 2,
+  BRIGHT_MULTIPLIER: 2,
 };
 
 let effectId = 'effect-none';
 
-function getStandartLevelValue (levelEffect) {
+function getStandardLevelValue (levelEffect) {
   return (levelEffect / EffectConstants.PERCENT_COEFFICIENT).toFixed(1);
 }
 
@@ -35,7 +35,7 @@ function getPhobosLevelValue (levelEffect) {
 }
 
 function getHeatLevelValue (levelEffect) {
-  const heatLev = (levelEffect / EffectConstants.PERCENT_COEFFICIENT) * EffectConstants.BRIGHT_MULTIPLER + EffectConstants.MIN_BRIGHT_VALUE;
+  const heatLev = (levelEffect / EffectConstants.PERCENT_COEFFICIENT) * EffectConstants.BRIGHT_MULTIPLIER + EffectConstants.MIN_BRIGHT_VALUE;
   return heatLev.toFixed(1);
 }
 
@@ -44,13 +44,13 @@ function changeLevelEffect (levelEffect) {
   switch (effectId) {
 
     case 'effect-chrome':
-      inputLevelEffect.value = getStandartLevelValue(levelEffect);
-      imgUploadPreview.style.filter = `grayscale(${getStandartLevelValue(levelEffect)})`;
+      inputLevelEffect.value = getStandardLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `grayscale(${getStandardLevelValue(levelEffect)})`;
       break;
 
     case 'effect-sepia':
-      inputLevelEffect.value = getStandartLevelValue(levelEffect);
-      imgUploadPreview.style.filter = `sepia(${getStandartLevelValue(levelEffect)})`;
+      inputLevelEffect.value = getStandardLevelValue(levelEffect);
+      imgUploadPreview.style.filter = `sepia(${getStandardLevelValue(levelEffect)})`;
       break;
 
     case 'effect-marvin':

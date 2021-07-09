@@ -18,8 +18,8 @@ inputScale.value = ScaleConstants.INPUT_SCALE_INITIAL_VALUE;
 let currentScale = getNumberScale(inputScale.value);
 
 function getNumberScale (stringPercent) {
-  const numberProcent = Number(stringPercent.slice(0, -1));
-  return numberProcent / ScaleConstants.PERCENT_COEFFICIENT;
+  const numberPercent = Number(stringPercent.slice(0, -1));
+  return numberPercent / ScaleConstants.PERCENT_COEFFICIENT;
 }
 
 function changeScale (newNumberScale) {
