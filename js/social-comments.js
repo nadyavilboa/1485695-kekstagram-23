@@ -23,7 +23,6 @@ function createFragmentComments (data) {
   } else {
     commentCount = 5;
   }
-  console.log(commentCount);
   for(let i = 0; i < commentCount; i++) {
 
     const element = commentTemplateListElement.cloneNode(true);
