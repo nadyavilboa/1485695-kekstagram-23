@@ -10,6 +10,9 @@ const socialCaption = blockBigPicture.querySelector('.social__caption'); //по�
 
 const buttonDownloadComments = blockBigPicture.querySelector('.social__comments-loader'); //кнопка загрузки новых комментариев
 
+const inputComment = blockBigPicture.querySelector('.social__footer-text'); //поле ввода комментария
+
+const buttonClosePhoto = document.querySelector('#picture-cancel');
 
 function documentKeydownHandler (evt) {
   if(isEscapeEvent(evt)) {
