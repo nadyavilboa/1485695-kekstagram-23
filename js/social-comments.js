@@ -160,7 +160,7 @@ function downloadComments() {
 
   if(countDownloadedComments === countComments) {
     buttonDownloadComments.setAttribute('disabled', 'disabled');
-    buttonDownloadComments.style.color = '#fff';
+    buttonDownloadComments.style.display = 'none';
   }
 }
 
@@ -178,7 +178,7 @@ function setInitialParametersComments(photo) {
     if(buttonDownloadComments.hasAttribute('disabled')) {
       buttonDownloadComments.removeAttribute('disabled');
     }
-    buttonDownloadComments.style.color = '#3b77c0';
+    buttonDownloadComments.style.display = 'inline-block';
     buttonDownloadComments.addEventListener('click', buttonDownloadCommentsClickHandler);
 
   } else {
@@ -186,7 +186,7 @@ function setInitialParametersComments(photo) {
 
     //если нет, скрываем кнопку и обновляем информацию о количестве комментариев
     buttonDownloadComments.setAttribute('disabled', 'disabled');
-    buttonDownloadComments.style.color = '#fff';
+    buttonDownloadComments.style.display = 'none';
     const elementCountComments = countComments.toString();
     printedCommets.textContent = elementCountComments;
   }
