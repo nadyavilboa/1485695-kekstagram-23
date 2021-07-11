@@ -14,6 +14,8 @@ const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
 
+const URL_SEND = 'https://23.javascript.pages.academy/kekstagram';
+
 function openPopup () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -25,6 +27,7 @@ function openPopup () {
 
   inputHashtag.addEventListener('input', inputHashtagInputHandler);
   inputComment.addEventListener('input', inputCommentInputHandler);
+  formDownloadPicture.addEventListener('submit', formDownloadPictureSubmitHandler);
 }
 
 function closePopup () {
@@ -63,6 +66,17 @@ function inputFilePictureChangeHandler () {
 
 function buttonCloseEditorClickHandler () {
   closePopup();
+}
+
+function formDownloadPictureSubmitHandler (evt) {
+  evt.preventDefault();
+  fetch(
+    URL_SEND,
+    {
+      method: 'POST',
+      body: new FormData(evt.target),
+    },
+  );
 }
 
 inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);

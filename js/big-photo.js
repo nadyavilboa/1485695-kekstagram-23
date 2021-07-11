@@ -1,7 +1,6 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-import { dataCollection } from './picture-painting.js';
+import { dataCollection } from './get-data.js';
 import { setComments, buttonShowCommentsClickHandler } from './social-comments.js';
-
 const body = document.querySelector('body');
 
 //модальное окно фотографии
@@ -40,7 +39,7 @@ function openFullPhoto (image) {
   body.classList.add('modal-open');
 
   const imageId = image.getAttribute('id');
-  const pictureData = dataCollection[imageId - 1];
+  const pictureDataCollection = dataCollection[imageId-1];
 
   bigPicture.src = pictureData.url;
   makeBigPictureInfo(pictureData);
