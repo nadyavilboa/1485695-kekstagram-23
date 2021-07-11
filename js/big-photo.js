@@ -1,16 +1,18 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
 import { dataCollection } from './picture-painting.js';
-import { setInitialParametersComments, buttonDownloadCommentsClickHandler } from './social-comments.js';
+import { setComments, buttonDownloadCommentsClickHandler } from './social-comments.js';
+
 const body = document.querySelector('body');
 
-const blockBigPicture = document.querySelector('.big-picture'); //модальное окно фотографии
+//модальное окно фотографии
+const blockBigPicture = document.querySelector('.big-picture');
 const bigPicture = blockBigPicture.querySelector('.big-picture__img').children[0];
-const likesCount = blockBigPicture.querySelector('.likes-count');
-const socialCaption = blockBigPicture.querySelector('.social__caption'); //подпись к фото
 
-const buttonDownloadComments = blockBigPicture.querySelector('.social__comments-loader'); //кнопка загрузки новых комментариев
+const likesPicture = blockBigPicture.querySelector('.likes-count');
+const descriptionPicture = blockBigPicture.querySelector('.social__caption');
 
-const inputComment = blockBigPicture.querySelector('.social__footer-text'); //поле ввода комментария
+const buttonShowComments = blockBigPicture.querySelector('.social__comments-loader');
+const inputComment = blockBigPicture.querySelector('.social__footer-text');
 
 const buttonClosePhoto = document.querySelector('#picture-cancel');
 
@@ -27,10 +29,10 @@ function buttonClosePhotoKeydownHandler (evt) {
   }
 }
 
-function makeTextInfo (photo) {
-  likesCount.textContent = photo.likes;
-  socialCaption.textContent = photo.description;
-  setInitialParametersComments(photo);
+function makeBigPictureInfo (photo) {
+  likesPicture.textContent = photo.likes;
+  descriptionPicture.textContent = photo.description;
+  setComments(photo);
 }
 
 function openFullPhoto (image) {
@@ -38,10 +40,10 @@ function openFullPhoto (image) {
   body.classList.add('modal-open');
 
   const imageId = image.getAttribute('id');
-  const pictureDataCollection = dataCollection[imageId - 1];
+  const pictureData = dataCollection[imageId - 1];
 
-  bigPicture.src = pictureDataCollection.url;
-  makeTextInfo(pictureDataCollection);
+  bigPicture.src = pictureData.url;
+  makeBigPictureInfo(pictureData);
 
   inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);
@@ -53,7 +55,7 @@ function closeFullPhoto() {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', documentKeydownHandler);
-  buttonDownloadComments.removeEventListener('click', buttonDownloadCommentsClickHandler);
+  buttonShowComments.removeEventListener('click', buttonDownloadCommentsClickHandler);
   buttonClosePhoto.removeEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 

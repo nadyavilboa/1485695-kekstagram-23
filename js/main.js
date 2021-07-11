@@ -1,4 +1,4 @@
-import './picture-painting.js'; //отрисовка миниатюр
-import './popup-editor.js'; //окно редактора загруженной пользователем картинки
+import './picture-painting.js';
+import './popup-editor.js';
 import './input-validation.js';
-import './show-full-photo.js'; //окно с информацией о фотографии, загруженной другим пользователем
+import './show-full-photo.js';

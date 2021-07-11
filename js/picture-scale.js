@@ -27,7 +27,7 @@ function changeScale (newNumberScale) {
 
   newNumberScale = newNumberScale * ScaleConstants.PERCENT_COEFFICIENT;
   const newStringScale = `${newNumberScale.toString()}%`;
-  inputScale.value =  newStringScale; //значение масштаба в поле ввода
+  inputScale.value =  newStringScale;
 
   currentScale = getNumberScale(newStringScale);
 

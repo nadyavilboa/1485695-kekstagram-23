@@ -1,15 +1,18 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
-
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 
 const body = document.querySelector('body');
-const formDownloadPicture = document.querySelector('#upload-select-image'); //форма, собирающая все данные про изображение
-const inputFilePicture = formDownloadPicture.querySelector('#upload-file'); //поле загрузки фото
 
-const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay'); //окно редактора загруженной картинки
-const buttonCloseEditor = popupEditor.querySelector('#upload-cancel'); //кнопка, закрывает редактор
+//форма, собирающая все данные о загруженном изображении
+const formDownloadPicture = document.querySelector('#upload-select-image');
+
+//поле загрузки изображения
+const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
+
+//окно редактора загруженной картинки
+const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
+const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
 
 function openPopup () {
   popupEditor.classList.remove('hidden');

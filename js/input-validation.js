@@ -14,7 +14,9 @@ function checkInputIsActive () {
 }
 
 function checkHashtagMatchesRule (hashtag) {
-  const regExp = /^#[A-Za-zА-Яа-я0-9]{1,19}$/; //число 19 - не более 19 символов после решетки
+
+  //число 19 - не более 19 символов после решетки
+  const regExp = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
   return regExp.test(hashtag);
 }
 
