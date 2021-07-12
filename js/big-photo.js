@@ -1,6 +1,6 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
 import { dataCollection } from './picture-painting.js';
-import { setComments, buttonDownloadCommentsClickHandler } from './social-comments.js';
+import { setComments, buttonShowCommentsClickHandler } from './social-comments.js';
 
 const body = document.querySelector('body');
 
@@ -55,7 +55,7 @@ function closeFullPhoto() {
   body.classList.remove('modal-open');
 
   document.removeEventListener('keydown', documentKeydownHandler);
-  buttonShowComments.removeEventListener('click', buttonDownloadCommentsClickHandler);
+  buttonShowComments.removeEventListener('click', buttonShowCommentsClickHandler);
   buttonClosePhoto.removeEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 

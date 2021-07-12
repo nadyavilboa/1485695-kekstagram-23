@@ -125,4 +125,4 @@ function insertComments (data, countCommentsForPrinting) {
 
 }
 
-export { setComments, buttonShowCommentsClickHandler as buttonDownloadCommentsClickHandler };
+export { setComments, buttonShowCommentsClickHandler };
