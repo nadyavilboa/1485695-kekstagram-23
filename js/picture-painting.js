@@ -1,5 +1,8 @@
-const pictureTemplate = document.querySelector('#picture').content; //это шаблон картинки
-const pictureTemplateLink = pictureTemplate.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
+//шаблон картинки
+const pictureTemplate = document.querySelector('#picture').content;
+
+//ссылка - потомок шаблона, внутри которого нужные объекты
+const pictureTemplateLink = pictureTemplate.querySelector('.picture');
 
 function createFragmentPhotos (data) {
   const fragment = document.createDocumentFragment();

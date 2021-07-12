@@ -4,17 +4,18 @@ import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
 
 const body = document.querySelector('body');
 
-//форма, собирающая все данные о загруженном изображении
+//форма, заполняется при загрузке изображения
 const formDownloadPicture = document.querySelector('#upload-select-image');
 
 //поле загрузки изображения
 const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
 
-//окно редактора загруженной картинки
+//модальное окно формы
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
 
-const URL_SEND = 'https://23.javascript.pages.academy/kekstagram'; //адрес отправки данных
+//адрес отправки данных
+const URL_SEND = 'https://23.javascript.pages.academy/kekstagram';
 
 function openPopup () {
   popupEditor.classList.remove('hidden');

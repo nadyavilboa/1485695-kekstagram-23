@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 //модальное окно с фото и информацией о нем
 const blockBigPicture = document.querySelector('.big-picture');
 
@@ -15,25 +16,38 @@ const blockBigPicture = document.querySelector('.big-picture'); //модальн
 const socialCommentsCount = blockBigPicture.querySelector('.social__comment-count'); //сообщение о количестве комментариев
 const commentsCount = socialCommentsCount.querySelector('.comments-count'); //число комментариев к фото
 const printedCommets = socialCommentsCount.querySelector('.printed-comments'); //отображение в разметке числа напечатанных комментариев
+=======
+//модальное окно с загруженной фотографии, с информацией о ней
+const blockBigPicture = document.querySelector('.big-picture');
+>>>>>>> 5f6b2fe (Исправляет комментарии)
 
-const socialComments = document.querySelector('.social__comments'); //список комментариев к фото
-const inputComment = blockBigPicture.querySelector('.social__footer-text'); //поле ввода комментария
-const buttonDownloadComments = blockBigPicture.querySelector('.social__comments-loader'); //кнопка загрузки новых комментариев
+//блок с информацией о количестве комментариев
+const blockCommentsCount = blockBigPicture.querySelector('.social__comment-count');
+const allCommentsCount = blockCommentsCount.querySelector('.comments-count');
+const printedCommetsCount = blockCommentsCount.querySelector('.printed-comments');
 
-const commentTemplate = document.querySelector('#comment').content; //шаблон комментария
-const commentTemplateListElement = commentTemplate.querySelector('.social__comment'); //элемент списка комментариев, потомок шаблона
+const listComments = document.querySelector('.social__comments');
+const buttonShowComments = blockBigPicture.querySelector('.social__comments-loader');
+const inputComment = blockBigPicture.querySelector('.social__footer-text');
+
+//шаблон комментария
+const commentTemplate = document.querySelector('#comment').content;
+
+//элемент списка комментариев, потомок шаблона
+const commentTemplateListElement = commentTemplate.querySelector('.social__comment');
 const fragment = document.createDocumentFragment();
 
-const COUNT_COMMENTS_TO_DOWNLOAD = 5;
+const COUNT_COMMENTS_TO_SHOW = 5;
 
 let photoData = [];
 let countComments = 0;
 
-function buttonDownloadCommentsClickHandler () {
-  downloadComments();
+function buttonShowCommentsClickHandler () {
+  showComments();
 }
 >>>>>>> 124cc87 (Дорабатывает функционал)
 
+<<<<<<< HEAD
 //шаблон комментария
 const commentTemplate = document.querySelector('#comment').content;
 
@@ -122,6 +136,11 @@ function setComments(photo) {
     //обновляем число показанных комментов в разметке
     const elementCountComments = countComments.toString();
     printedCommentsCount.textContent = elementCountComments;
+=======
+function cleanListComments () {
+  while (listComments.firstChild) {
+    listComments.removeChild(listComments.firstChild);
+>>>>>>> 5f6b2fe (Исправляет комментарии)
   }
 <<<<<<< HEAD
 
@@ -129,6 +148,7 @@ function setComments(photo) {
   inputComment.setAttribute('disabled', 'disabled');
 }
 
+<<<<<<< HEAD
 function insertComments (data, countCommentsForPrinting) {
   //из объекта фотографии берем только комментарии
   const comments = data.comments;
@@ -142,60 +162,81 @@ function downloadComments() {
   const countPrintedComments = socialComments.children.length; //сколько уже загружено комментов
   const residueComments = countComments - countPrintedComments;
   let countDownloadedComments;
+=======
+function showComments() {
+  //считаем, сколько комментов уже было показано
+  const countPrintedComments = listComments.children.length;
+  const restOfComments = countComments - countPrintedComments;
+>>>>>>> 5f6b2fe (Исправляет комментарии)
 
-  if(residueComments < COUNT_COMMENTS_TO_DOWNLOAD) {
-    //осталось меньше 5-ти комментов - загружаем все
-    socialComments.appendChild(insertComments(photoData,residueComments));
-    countDownloadedComments = countComments; //считаем, сколько загружено
+  //переменная для сохранения числа добавленных, новых комментов
+  let countShowComments;
+
+  if(restOfComments < COUNT_COMMENTS_TO_SHOW) {
+    //осталось меньше 5-ти комментов - показываем все комменты
+    listComments.appendChild(insertComments(photoData,restOfComments));
+    countShowComments = countComments;
     const elementCountComments = countComments.toString();
-    printedCommets.textContent = elementCountComments; //обновляем число в разметке
+
+    //обновляем в разметке число показанных комментов
+    printedCommetsCount.textContent = elementCountComments;
 
   } else {
-    //загружаем 5 комментариев
-    socialComments.appendChild(insertComments(photoData,COUNT_COMMENTS_TO_DOWNLOAD));
-    countDownloadedComments = countPrintedComments + COUNT_COMMENTS_TO_DOWNLOAD; //считаем, сколько загружено
-    const elementCountComments = countDownloadedComments.toString();
-    printedCommets.textContent = elementCountComments; //обновляем число в разметке
+    //показываем 5 комментариев
+    listComments.appendChild(insertComments(photoData,COUNT_COMMENTS_TO_SHOW));
+    countShowComments = countPrintedComments + COUNT_COMMENTS_TO_SHOW;
+    const elementCountComments = countShowComments.toString();
+
+    //обновляем число в разметке
+    printedCommetsCount.textContent = elementCountComments;
   }
 
-  if(countDownloadedComments === countComments) {
-    buttonDownloadComments.setAttribute('disabled', 'disabled');
-    buttonDownloadComments.style.display = 'none';
+  if(countShowComments === countComments) {
+    buttonShowComments.setAttribute('disabled', 'disabled');
+    buttonShowComments.style.display = 'none';
   }
 }
 
-function setInitialParametersComments(photo) {
+function setComments(photo) {
   photoData = photo;
-  countComments = photo.comments.length; //всего комментариев к фото
-  commentsCount.textContent = countComments;
-  cleanListComments(); //при открытии модального окна, очищаем список комментариев и потом его заполняем
 
-  if(countComments > COUNT_COMMENTS_TO_DOWNLOAD) {
-    socialComments.appendChild(insertComments(photo,COUNT_COMMENTS_TO_DOWNLOAD)); //вставляем комментарии
+  //вычисление и отображение числа комментариев к фото
+  countComments = photo.comments.length;
+  allCommentsCount.textContent = countComments;
 
-    printedCommets.textContent = COUNT_COMMENTS_TO_DOWNLOAD.toString();
-    //если комментариев больше 5, то нужна кнопка Загрузить ещё комментарии
-    if(buttonDownloadComments.hasAttribute('disabled')) {
-      buttonDownloadComments.removeAttribute('disabled');
+  //при открытии модального окна, очищаем список комментариев и потом его заполняем
+  cleanListComments();
+
+  //если комментариев больше 5, загружаем 5 комментариев и делаем доступной кнопку Загрузить ещё комментарии
+  if(countComments > COUNT_COMMENTS_TO_SHOW) {
+    listComments.appendChild(insertComments(photo,COUNT_COMMENTS_TO_SHOW));
+    printedCommetsCount.textContent = COUNT_COMMENTS_TO_SHOW.toString();
+
+    if(buttonShowComments.hasAttribute('disabled')) {
+      buttonShowComments.removeAttribute('disabled');
     }
-    buttonDownloadComments.style.display = 'inline-block';
-    buttonDownloadComments.addEventListener('click', buttonDownloadCommentsClickHandler);
+    buttonShowComments.style.display = 'inline-block';
+    buttonShowComments.addEventListener('click', buttonShowCommentsClickHandler);
 
   } else {
-    socialComments.appendChild(insertComments(photo,countComments));
+    //если нет, вставляем имеющиеся комментарии и скрываем кнопку
+    listComments.appendChild(insertComments(photo,countComments));
 
-    //если нет, скрываем кнопку и обновляем информацию о количестве комментариев
-    buttonDownloadComments.setAttribute('disabled', 'disabled');
-    buttonDownloadComments.style.display = 'none';
+    buttonShowComments.setAttribute('disabled', 'disabled');
+    buttonShowComments.style.display = 'none';
+
+    //обновляем число показанных комментариев в разметке
     const elementCountComments = countComments.toString();
-    printedCommets.textContent = elementCountComments;
+    printedCommetsCount.textContent = elementCountComments;
   }
 
-  inputComment.setAttribute('disabled', 'disabled'); //поле ввода блокируем - не используется
+  //поле ввода блокируем - не используется
+  inputComment.setAttribute('disabled', 'disabled');
 }
 
 function insertComments (data, countCommentsForPrinting) {
-  const comments = data.comments; //это комментарии для вставки
+  //из объекта фотографии берем только комментарии
+  const comments = data.comments;
 
   for(let i = 0; i < countCommentsForPrinting; i++) {
 >>>>>>> 124cc87 (Дорабатывает функционал)
@@ -217,7 +258,11 @@ function insertComments (data, countCommentsForPrinting) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export { setComments, buttonShowCommentsClickHandler };
 =======
 export { setInitialParametersComments, buttonDownloadCommentsClickHandler };
 >>>>>>> 124cc87 (Дорабатывает функционал)
+=======
+export { setComments, buttonShowCommentsClickHandler };
+>>>>>>> 5f6b2fe (Исправляет комментарии)
