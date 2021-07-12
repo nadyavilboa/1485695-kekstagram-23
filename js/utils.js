@@ -1,5 +1,4 @@
 //использовано решение с данного сайта https://learn.javascript.ru/task/random-int-min-max
-
 function getRandomInteger(numberLeft, numberRight) {
   if(numberLeft < 0 || numberRight < 0) {
     return null;
@@ -29,5 +28,5 @@ function isEnterEvent(evt) {
   return evt.key === 'Enter';
 }
 
-export {getRandomInteger, isEscapeEvent, isEnterEvent, checkLengthLine};
+export { getRandomInteger, isEscapeEvent, isEnterEvent, checkLengthLine };
 

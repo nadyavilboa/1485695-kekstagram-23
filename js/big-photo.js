@@ -34,15 +34,19 @@ function makeBigPictureInfo (photo) {
   setComments(photo);
 }
 
+async function dataPhoto (imageId) {
+  const photos = await dataPromise;
+  const pictureDataCollection = photos[imageId];
+  bigPicture.src = pictureDataCollection.url;
+  makeBigPictureInfo(pictureDataCollection);
+}
+
 function openFullPhoto (image) {
   blockBigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 
   const imageId = image.getAttribute('id');
-  const pictureDataCollection = dataCollection[imageId-1];
-
-  bigPicture.src = pictureData.url;
-  makeBigPictureInfo(pictureData);
+  dataPhoto(imageId);
 
   inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);

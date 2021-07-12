@@ -14,7 +14,7 @@ const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
 
-const URL_SEND = 'https://23.javascript.pages.academy/kekstagram';
+const URL_SEND = 'https://23.javascript.pages.academy/kekstagram'; //адрес отправки данных
 
 function openPopup () {
   popupEditor.classList.remove('hidden');
@@ -77,6 +77,7 @@ function formDownloadPictureSubmitHandler (evt) {
       body: new FormData(evt.target),
     },
   );
+  closePopup();
 }
 
 inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);

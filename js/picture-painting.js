@@ -1,7 +1,3 @@
-//import {createArrayPhotos} from './data-generation.js';
-
-//const dataCollection = createArrayPhotos(); //генерация данных
-
 const pictureTemplate = document.querySelector('#picture').content; //это шаблон картинки
 const pictureTemplateLink = pictureTemplate.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
 
@@ -25,6 +21,5 @@ function createFragmentPhotos (data) {
   return fragment;
 }
 
-//pictureBlock.appendChild(createFragmentPhotos(dataCollection));
 
 export { createFragmentPhotos };
