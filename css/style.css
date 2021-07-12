@@ -1331,7 +1331,8 @@ main {
    * Экраны ошибки и успеха загрузки изображения
    */
 
-  .error,
+  .error-download,
+  .error-send,
   .success {
     position: fixed;
     display: flex;

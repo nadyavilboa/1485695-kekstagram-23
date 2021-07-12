@@ -1,6 +1,7 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
+import { formDownloadPictureSubmitHandler } from './request-server.js';
 
 const body = document.querySelector('body');
 
@@ -14,9 +15,6 @@ const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
 
-//адрес отправки данных
-const URL_SEND = 'https://23.javascript.pages.academy/kekstagram';
-
 function openPopup () {
   popupEditor.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -26,8 +24,8 @@ function openPopup () {
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.addEventListener('input', inputHashtagInputHandler);
-  inputComment.addEventListener('input', inputCommentInputHandler);
+  //inputHashtag.addEventListener('input', inputHashtagInputHandler);
+  //inputComment.addEventListener('input', inputCommentInputHandler);
   formDownloadPicture.addEventListener('submit', formDownloadPictureSubmitHandler);
 }
 
@@ -69,18 +67,8 @@ function buttonCloseEditorClickHandler () {
   closePopup();
 }
 
-function formDownloadPictureSubmitHandler (evt) {
-  evt.preventDefault();
-  fetch(
-    URL_SEND,
-    {
-      method: 'POST',
-      body: new FormData(evt.target),
-    },
-  );
-  closePopup();
-}
-
 inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);
 
 buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);
+
+export { closePopup };

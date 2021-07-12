@@ -1,6 +1,6 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
+import { dataPromise } from './request-server.js';
 import { setComments, buttonShowCommentsClickHandler } from './social-comments.js';
-import { dataPromise } from './get-data.js';
 
 const body = document.querySelector('body');
 
@@ -29,17 +29,10 @@ function buttonClosePhotoKeydownHandler (evt) {
   }
 }
 
-<<<<<<< HEAD
 function makeBigPictureInfo (photo) {
   likesPicture.textContent = photo.likes;
   descriptionPicture.textContent = photo.description;
   setComments(photo);
-=======
-function makeTextInfo (photo) {
-  likesPicture.textContent = photo.likes;
-  descriptionPicture.textContent = photo.description;
-  setInitialParametersComments(photo);
->>>>>>> 5f6b2fe (Исправляет комментарии)
 }
 
 async function dataPhoto (imageId) {
