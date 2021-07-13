@@ -1,12 +1,16 @@
 import {createArrayPhotos} from './data-generation.js';
 
-const dataCollection = createArrayPhotos(); //генерация данных
+//генерация данных
+const dataCollection = createArrayPhotos();
 
-const pictureBlock = document.querySelector('.pictures'); //Сюда будем вставлять готовые картинки
+//место вставки готовых картинок
+const pictureBlock = document.querySelector('.pictures');
 
-const pictureTemplate = document.querySelector('#picture').content; //это шаблон картинки
+//шаблон картинки
+const pictureTemplate = document.querySelector('#picture').content;
 
-const pictureTemplateLink = pictureTemplate.querySelector('.picture'); //ссылка потомок шаблона, внутри которого нужные нам объекты
+//ссылка потомок шаблона, внутри которого нужные нам объекты
+const pictureTemplateLink = pictureTemplate.querySelector('.picture');
 
 function createFragmentPhotos (data) {
   const fragment = document.createDocumentFragment();

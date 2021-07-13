@@ -7,7 +7,8 @@ const inputLevelEffect = blockSlider.querySelector('.effect-level__value');
 const sliderElement = blockSlider.querySelector('.effect-level__slider');
 
 const EffectConstants = {
-  INDEX_EFFECT_NAME: 7,     //в строке id эффекта название эффекта начинается с 7 символа
+  //в строке id эффекта название эффекта начинается с 7 символа
+  INDEX_EFFECT_NAME: 7,
   PERCENT_COEFFICIENT: 100,
   COUNT_PIXELS_MAX_BLUR: 3,
   MIN_BRIGHT_VALUE: 1,
