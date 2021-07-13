@@ -24,8 +24,9 @@ function openPopup () {
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  //inputHashtag.addEventListener('input', inputHashtagInputHandler);
-  //inputComment.addEventListener('input', inputCommentInputHandler);
+  inputHashtag.addEventListener('input', inputHashtagInputHandler);
+  inputComment.addEventListener('input', inputCommentInputHandler);
+
   formDownloadPicture.addEventListener('submit', formDownloadPictureSubmitHandler);
 }
 
@@ -44,6 +45,8 @@ function closePopup () {
 
   inputHashtag.removeEventListener('input', inputHashtagInputHandler);
   inputComment.removeEventListener('input', inputCommentInputHandler);
+
+  formDownloadPicture.removeEventListener('submit', formDownloadPictureSubmitHandler);
 }
 
 function documentKeydownHandler (evt) {

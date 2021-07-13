@@ -8,6 +8,7 @@ const pictureBlock = document.querySelector('.pictures');
 const URL_GET = 'https://23.javascript.pages.academy/kekstagram/data';
 const URL_SEND = 'https://23.javascript.pages.academy/kekstagram';
 
+//получение данных с сервера
 async function getData () {
   try {
     //скачиваем данные
@@ -25,32 +26,29 @@ async function getData () {
   }
 }
 
-const dataPromise = getData();
-
-function requestPost (evt) {
-  fetch(
+//отправка данных формы и вывод сообщений
+async function sendForm(evt) {
+  const responce = await fetch(
     URL_SEND,
     {
       method: 'POST',
       body: new FormData(evt.target),
     },
   );
-}
-
-function sendForm(evt) {
-  try {
-    requestPost(evt);
-  } catch(err) {
-    closePopup();
+  closePopup();
+  if (responce.ok) {
+    showSuccessForm();
+  } else {
     showErrorForm();
   }
-  closePopup();
-  showSuccessForm();
 }
 
 function formDownloadPictureSubmitHandler (evt) {
   evt.preventDefault();
   sendForm(evt);
 }
+
+//при клике по миниатюре открывается модальное окно, данные с сервера передаем в big-photo.js
+const dataPromise = getData();
 
 export { dataPromise, formDownloadPictureSubmitHandler };
