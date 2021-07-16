@@ -1,64 +1,83 @@
-//шаблон сообщения об ошибке загрузки
-const offlineTemplate = document.querySelector('#error-download').content;
-const messageOfflineTemplate = offlineTemplate.querySelector('.error-download');
+import { isEscapeEvent } from './utils.js';
 
-//шаблон сообщения об ошибке отправки формы
+//шаблоны сообщений о результатах взаимодействия с сервером
+const errorLoadingTemplate = document.querySelector('#error-download').content;
+const messageErrorLoadingTemplate = errorLoadingTemplate.querySelector('.error-download');
+
 const errorFormTemplate = document.querySelector('#error').content;
 const messageErrorFormTemplate = errorFormTemplate.querySelector('.error-send');
 
-//шаблон сообщения об успешной отправке формы
 const successFormTemplate = document.querySelector('#success').content;
 const messageSuccessFormTemplate = successFormTemplate.querySelector('.success');
 
-const body = document.querySelector('body');
+const body = document.body;
 
-//создание фрагмента нужного сообщения
-function createMessageFragment (messageTemplate) {
-  const fragment = document.createDocumentFragment();
+function createMessage (messageTemplate) {
   const element = messageTemplate.cloneNode(true);
-
-  fragment.appendChild(element);
-
-  return fragment;
+  return element;
 }
 
-//показ и закрытие сообщения о том, что данные с сервера не получены
-function showMessageOffline () {
-  body.appendChild(createMessageFragment(messageOfflineTemplate));
-  const buttonCloseOfflineMessage = document.querySelector('.error__button');
-  buttonCloseOfflineMessage.addEventListener('click', buttonCloseOfflineMessageClickHandler);
+function showMessage(message, buttonClass) {
+  body.appendChild(createMessage(message));
+
+  const buttonCloseMessage = document.querySelector(buttonClass);
+  buttonCloseMessage.addEventListener('click', buttonCloseMessageClickHandler);
+  document.addEventListener('keydown', documentKeydownHandler);
+  document.addEventListener('click', overlayClickHandler);
 }
 
-function buttonCloseOfflineMessageClickHandler () {
-  const message = document.querySelector('.error-download');
+function closeMessage () {
+  const message = body.lastChild;
   message.style.display = 'none';
   body.removeChild(message);
 }
 
-//показ и закрытие сообщения о том, что форма не отправлена
+function documentKeydownHandler (evt) {
+  if(isEscapeEvent(evt)) {
+    evt.preventDefault();
+    closeMessage();
+  }
+}
+
+function checkElementIsMessage (element) {
+  const messagesClasses = ['error-download', 'error-send', 'success'];
+
+  for (let i = 0; i < messagesClasses.length; i++) {
+    if(element.className === messagesClasses[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function overlayClickHandler (evt) {
+  const element = body.lastChild;
+  if(checkElementIsMessage(element)) {
+    if(checkElementIsMessage(evt.target)) {
+      closeMessage();
+    }
+  }
+}
+
+//сообщение о том, что данные с сервера не получены
+function showErrorLoading () {
+  showMessage(messageErrorLoadingTemplate, '.error__button');
+}
+
+function buttonCloseMessageClickHandler () {
+  closeMessage();
+}
+
 function showErrorForm () {
-  body.appendChild(createMessageFragment(messageErrorFormTemplate));
-  const buttonCloseErrorForm = document.querySelector('.error__button');
-  buttonCloseErrorForm.addEventListener('click', buttonCloseErrorFormClickHandler);
-}
+  showMessage(messageErrorFormTemplate, '.error__button');
 
-function buttonCloseErrorFormClickHandler () {
+  //форма не закрыта и сообщение должно отображаться поверх неё
   const message = document.querySelector('.error-send');
-  message.style.display = 'none';
-  body.removeChild(message);
+  message.style.zIndex = '50';
 }
 
-//показ и закрытие сообщения о том, что форма отправлена
 function showSuccessForm () {
-  body.appendChild(createMessageFragment(messageSuccessFormTemplate));
-  const buttonCloseSuccessForm = document.querySelector('.success__button');
-  buttonCloseSuccessForm.addEventListener('click', buttonCloseSuccessFormClickHandler);
+  showMessage(messageSuccessFormTemplate, '.success__button');
 }
 
-function buttonCloseSuccessFormClickHandler () {
-  const message = document.querySelector('.success');
-  message.style.display = 'none';
-  body.removeChild(message);
-}
-
-export { showMessageOffline, showErrorForm, showSuccessForm };
+export { showErrorLoading, showErrorForm, showSuccessForm };

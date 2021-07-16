@@ -1,4 +1,4 @@
-import { checkLengthLine } from './utils.js';
+import { checkLengthLine, unique } from './utils.js';
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
@@ -13,7 +13,7 @@ function checkInputIsActive () {
   return currentElement === inputHashtag || currentElement === inputComment;
 }
 
-function checkHashtagMatchesRule (hashtag) {
+function checkRuleForHashtag (hashtag) {
 
   //число 19 - не более 19 символов после решетки
   const regExp = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
@@ -35,22 +35,21 @@ function checkHashtags () {
 
   for(let i = 0; i < hashtags.length; i++) {
 
-    if(!checkHashtagMatchesRule(hashtags[i])) {
+    if(!checkRuleForHashtag(hashtags[i])) {
       allHashtagsCorrect = false;
     }
 
   }
-  for(let i = 0; i < hashtags.length; i++) {
 
-    for(let j = i+1; j < hashtags.length; j++) {
-
-      if(hashtags[i].toLowerCase() === hashtags[j].toLowerCase()) {
-        noHashtagMatches = false;
-      }
-
-    }
-
+  //убираем в массиве прописные буквы и создаём копию без дубликатов
+  //если длина совпадает, значит дубликатов нет
+  for (let i = 0; i < hashtags.length; i++) {
+    hashtags[i] = hashtags[i].toLowerCase();
   }
+
+  const copyHashtags = unique(hashtags);
+  noHashtagMatches = hashtags.length === copyHashtags.length;
+
   return {
     noTooMuchHashtags: noTooMuchHashtags,
     allHashtagsCorrect: allHashtagsCorrect,

@@ -80,7 +80,7 @@ function createSliderElement () {
       min: 0,
       max: 100,
     },
-    start: 0,
+    start: 100,
     step: 1,
     connect: 'lower',
   });
@@ -103,7 +103,7 @@ function initImageEffect (effect) {
   }
 
   if(effectId !== 'effect-none' && sliderElement.hasChildNodes()) {
-    sliderElement.noUiSlider.set(0);
+    sliderElement.noUiSlider.set(100);
   }
 
   const effectName = effectId.slice(EffectConstants.INDEX_EFFECT_NAME);
