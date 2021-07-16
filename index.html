@@ -197,12 +197,24 @@
     </a>
   </template>
 
+  <!-- Сообщение с ошибкой загрузки изображений с сервера -->
+  <template id="error-download">
+    <section class="error-download">
+      <div class="error__inner">
+        <h2 class="error__title">Ошибка загрузки сайта</h2>
+        <p>Проверьте подключение к сети и попробуйте обновить страницу</p>
+        <button type="button" class="error__button">Закрыть</button>
+      </div>
+    </section>
+  </template>
+
   <!-- Сообщение с ошибкой загрузки изображения -->
   <template id="error">
-    <section class="error">
+    <section class="error-send">
       <div class="error__inner">
-        <h2 class="error__title">Ошибка загрузки файла</h2>
-        <button type="button" class="error__button">Загрузить другой файл</button>
+        <h2 class="error__title">Ошибка отправки формы</h2>
+        <p>Попробуйте снова загрузить другой файл</p>
+        <button type="button" class="error__button">Закрыть</button>
       </div>
     </section>
   </template>

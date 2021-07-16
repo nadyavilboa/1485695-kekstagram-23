@@ -1,17 +1,16 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
+import { formNewPictureSubmitHandler } from './send-form.js';
 
-const body = document.querySelector('body');
+const body = document.body;
 
-//форма, собирающая все данные о загруженном изображении
-const formDownloadPicture = document.querySelector('#upload-select-image');
+//форма, заполняется при загрузке изображения
+const formNewPicture = document.querySelector('#upload-select-image');
 
-//поле загрузки изображения
-const inputFilePicture = formDownloadPicture.querySelector('#upload-file');
+const inputFilePicture = formNewPicture.querySelector('#upload-file');
 
-//окно редактора загруженной картинки
-const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
+const popupEditor = formNewPicture.querySelector('.img-upload__overlay');
 const buttonCloseEditor = popupEditor.querySelector('#upload-cancel');
 
 function openPopup () {
@@ -23,8 +22,10 @@ function openPopup () {
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.addEventListener('input', inputHashtagInputHandler);
-  inputComment.addEventListener('input', inputCommentInputHandler);
+  inputHashtag.addEventListener('change', inputHashtagInputHandler);
+  inputComment.addEventListener('change', inputCommentInputHandler);
+
+  formNewPicture.addEventListener('submit', formNewPictureSubmitHandler);
 }
 
 function closePopup () {
@@ -40,8 +41,10 @@ function closePopup () {
   document.removeEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.removeEventListener('keydown', buttonCloseEditorKeydownHandler);
 
-  inputHashtag.removeEventListener('input', inputHashtagInputHandler);
-  inputComment.removeEventListener('input', inputCommentInputHandler);
+  inputHashtag.removeEventListener('change', inputHashtagInputHandler);
+  inputComment.removeEventListener('change', inputCommentInputHandler);
+
+  formNewPicture.removeEventListener('submit', formNewPictureSubmitHandler);
 }
 
 function documentKeydownHandler (evt) {
@@ -65,6 +68,6 @@ function buttonCloseEditorClickHandler () {
   closePopup();
 }
 
-inputFilePicture.addEventListener('change', inputFilePictureChangeHandler);
-
 buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);
+
+export { inputFilePictureChangeHandler, closePopup };

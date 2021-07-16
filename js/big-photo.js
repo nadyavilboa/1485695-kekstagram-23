@@ -1,8 +1,8 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-import { dataCollection } from './picture-painting.js';
+import { downloadedData } from './main.js';
 import { setComments, buttonShowCommentsClickHandler } from './social-comments.js';
 
-const body = document.querySelector('body');
+const body = document.body;
 
 //модальное окно фотографии
 const blockBigPicture = document.querySelector('.big-picture');
@@ -29,10 +29,17 @@ function buttonClosePhotoKeydownHandler (evt) {
   }
 }
 
-function makeBigPictureInfo (photo) {
+function fillPopupBigPhoto (photo) {
+  bigPicture.src = photo.url;
   likesPicture.textContent = photo.likes;
   descriptionPicture.textContent = photo.description;
   setComments(photo);
+}
+
+async function getDataPhoto (imageId) {
+  const photos = await downloadedData;
+  const pictureData = photos.find((item) => item.id === Number(imageId));
+  fillPopupBigPhoto(pictureData);
 }
 
 function openFullPhoto (image) {
@@ -40,13 +47,11 @@ function openFullPhoto (image) {
   body.classList.add('modal-open');
 
   const imageId = image.getAttribute('id');
-  const pictureData = dataCollection[imageId - 1];
-
-  bigPicture.src = pictureData.url;
-  makeBigPictureInfo(pictureData);
+  getDataPhoto(imageId);
 
   inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);
+  buttonShowComments.addEventListener('click', buttonShowCommentsClickHandler);
   buttonClosePhoto.addEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 
