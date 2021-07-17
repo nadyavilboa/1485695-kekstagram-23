@@ -1,33 +1,40 @@
 const API_URL = 'https://23.javascript.pages.academy/kekstagram';
 
-//получение данных с сервера
-async function fetchData () {
+async function fetchData (onSuccess, onFail) {
   try {
     const response = await fetch(`${API_URL}/data`);
 
-    // json-объект
-    const json = await response.json();
+    if(response.ok) {
+      const data = await response.json();
+      onSuccess(data);
+      return data;
+    } else {
+      onFail(response.status);
+    }
 
-    return json;
   } catch(err) {
-    return 0;
+    onFail(err);
   }
 }
 
-//отправка данных формы и вывод сообщений
-async function fetchForm(evt) {
-  const response = await fetch(
-    API_URL,
-    {
-      method: 'POST',
-      body: new FormData(evt.target),
-    },
-  );
-  if (response.ok) {
-    return true;
-  } else {
-    return false;
+async function sendForm(evt, onSuccess, onFail) {
+  try {
+    const response = await fetch(
+      API_URL,
+      {
+        method: 'POST',
+        body: new FormData(evt.target),
+      },
+    );
+
+    if (response.ok) {
+      onSuccess();
+    } else {
+      onFail(response.status);
+    }
+  } catch(err) {
+    onFail(err);
   }
 }
 
-export { fetchData, fetchForm };
+export { fetchData, sendForm };

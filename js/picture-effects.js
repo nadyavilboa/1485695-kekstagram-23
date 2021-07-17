@@ -1,10 +1,4 @@
 import { removeClassesImageEffects } from './initial-effects.js';
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
-
-const blockSlider = document.querySelector('.img-upload__effect-level');
-const inputLevelEffect = blockSlider.querySelector('.effect-level__value');
-const sliderElement = blockSlider.querySelector('.effect-level__slider');
 
 const EffectConstants = {
   //в строке id эффекта название эффекта начинается с 7 символа
@@ -14,6 +8,13 @@ const EffectConstants = {
   MIN_BRIGHT_VALUE: 1,
   BRIGHT_MULTIPLIER: 2,
 };
+
+const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview > img');
+
+const blockSlider = document.querySelector('.img-upload__effect-level');
+const inputLevelEffect = blockSlider.querySelector('.effect-level__value');
+const sliderElement = blockSlider.querySelector('.effect-level__slider');
 
 let effectId = 'effect-none';
 
@@ -86,7 +87,6 @@ function createSliderElement () {
   });
 
   sliderElement.noUiSlider.on('update', sliderElementUpdateHandler);
-
 }
 
 function initImageEffect (effect) {
@@ -118,8 +118,6 @@ function sliderElementUpdateHandler (_, handle, unencoded) {
 }
 
 function updateInitialSetting () {
-  //делает сброс параметров при выборе нового эффекта
-
   removeClassesImageEffects();
   imgUploadPreview.style.removeProperty('filter');
   inputLevelEffect.value = '';

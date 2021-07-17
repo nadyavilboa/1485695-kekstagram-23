@@ -1,7 +1,17 @@
-import { checkLengthLine, unique } from './utils.js';
+import { checkLengthLine } from './utils.js';
 
 const MAX_LENGTH_COMMENT = 140;
 const MAX_COUNT_HASHTAGS = 5;
+const MAX_LENGTH_HASHTAG = 20;
+
+const REG_EXP = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
+
+const ValidationErrors = {
+  TOO_MUCH_HASHTAGS: 'Хэш-тегов должно быть не больше пяти',
+  HASHTAG_UN_CORRECT: `Хэш-тег начинается с решётки, затем не менее 1, не более ${MAX_LENGTH_HASHTAG} символов: буквы и/или цифры`,
+  HASHTAG_MATCHES: 'Хэш-теги не должны повторяться. Строчные и прописные буквы не различаются',
+  LONG_COMMENT: `Комментарий не может быть длиннее ${MAX_LENGTH_COMMENT} символов`,
+};
 
 const formDownloadPicture = document.querySelector('#upload-select-image');
 const popupEditor = formDownloadPicture.querySelector('.img-upload__overlay');
@@ -14,10 +24,7 @@ function checkInputIsActive () {
 }
 
 function checkRuleForHashtag (hashtag) {
-
-  //число 19 - не более 19 символов после решетки
-  const regExp = /^#[A-Za-zА-Яа-я0-9]{1,19}$/;
-  return regExp.test(hashtag);
+  return REG_EXP.test(hashtag);
 }
 
 function checkHashtags () {
@@ -28,10 +35,10 @@ function checkHashtags () {
       noHashtagMatches: true,
     };
   }
-  const hashtags = inputHashtag.value.split(' ');
+
+  const hashtags = inputHashtag.value.trim().split(' ');
   const noTooMuchHashtags = hashtags.length <= MAX_COUNT_HASHTAGS;
   let allHashtagsCorrect = true;
-  let noHashtagMatches = true;
 
   for(let i = 0; i < hashtags.length; i++) {
 
@@ -47,8 +54,8 @@ function checkHashtags () {
     hashtags[i] = hashtags[i].toLowerCase();
   }
 
-  const copyHashtags = unique(hashtags);
-  noHashtagMatches = hashtags.length === copyHashtags.length;
+  const uniqueHashtags = new Set(hashtags);
+  const noHashtagMatches = hashtags.length === uniqueHashtags.size;
 
   return {
     noTooMuchHashtags: noTooMuchHashtags,
@@ -61,17 +68,17 @@ function printMessagesValidationHashtag() {
   const resultCheckHashtags = checkHashtags();
 
   if(!resultCheckHashtags.noTooMuchHashtags) {
-    inputHashtag.setCustomValidity('Хэш-тегов должно быть не больше пяти');
+    inputHashtag.setCustomValidity(ValidationErrors.TOO_MUCH_HASHTAGS);
     inputHashtag.classList.add('input-error');
   }
 
   else if (!resultCheckHashtags.allHashtagsCorrect) {
-    inputHashtag.setCustomValidity('Хэш-тег начинается с решётки, затем не менее 1, не более 20 символов: буквы и/или цифры');
+    inputHashtag.setCustomValidity(ValidationErrors.HASHTAG_UN_CORRECT);
     inputHashtag.classList.add('input-error');
   }
 
   else if (!resultCheckHashtags.noHashtagMatches) {
-    inputHashtag.setCustomValidity('Хэш-теги не должны повторяться. Строчные и прописные буквы не различаются');
+    inputHashtag.setCustomValidity(ValidationErrors.HASHTAG_MATCHES);
     inputHashtag.classList.add('input-error');
   }
 
@@ -87,7 +94,7 @@ function printMessagesValidationHashtag() {
 
 function checkComment () {
   if(!checkLengthLine(inputComment.value, MAX_LENGTH_COMMENT)) {
-    inputComment.setCustomValidity('Комментарий не может быть длиннее 140 символов');
+    inputComment.setCustomValidity(ValidationErrors.LONG_COMMENT);
     inputComment.classList.add('input-error');
   }
 

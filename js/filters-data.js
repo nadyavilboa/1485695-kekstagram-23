@@ -1,10 +1,13 @@
-import { dataPromise } from './request-server.js';
-import { createFragmentPhotos } from './picture-painting.js';
+import { downloadedData } from './main.js';
+import { renderData } from './rendering-pictures.js';
 import { shuffle } from './utils.js';
+import { debounce } from './utils/debounce.js';
+
+const RERENDER_DELAY = 500;
+
 const pictureBlock = document.querySelector('.pictures');
 
 const imgFilters = document.querySelector('.img-filters');
-
 const buttonDefault = imgFilters.querySelector('#filter-default');
 const buttonRandom = imgFilters.querySelector('#filter-random');
 const buttonDiscussed = imgFilters.querySelector('#filter-discussed');
@@ -25,27 +28,51 @@ function unblockButton(button) {
   }
 }
 
+function clearListPictures () {
+  const pictures = pictureBlock.querySelectorAll('.picture');
+  pictures.forEach(() => {
+    pictureBlock.removeChild(pictureBlock.lastChild);
+  });
+}
+
 function setFilters () {
+  imgFilters.classList.remove('img-filters--inactive');
   blockButton(buttonDefault);
   unblockButton(buttonRandom);
   unblockButton(buttonDiscussed);
+
+  imgFilters.addEventListener('click', debounce(imgFiltersClickHandler, RERENDER_DELAY));
 }
 
-setFilters();
+function imgFiltersClickHandler (evt) {
+  const filterId = evt.target.getAttribute('id');
 
-function clearListPictures () {
-  const pictures = pictureBlock.querySelectorAll('.picture');
-  for(let i = 0; i < pictures.length; i++) {
-    pictureBlock.removeChild(pictureBlock.lastChild);
+  switch(filterId) {
+
+    case 'filter-default':
+      filterImageDefault();
+      break;
+
+    case 'filter-random':
+      filterImageRandom();
+      break;
+
+    case 'filter-discussed':
+      filterImageDiscussed();
+      break;
+
   }
 }
 
 async function filterImageDefault () {
-  setFilters();
+  blockButton(buttonDefault);
+  unblockButton(buttonRandom);
+  unblockButton(buttonDiscussed);
+
   clearListPictures();
 
-  const photos = await dataPromise;
-  pictureBlock.appendChild(createFragmentPhotos(photos));
+  const photos = await downloadedData;
+  renderData(photos);
 }
 
 async function filterImageRandom () {
@@ -55,10 +82,10 @@ async function filterImageRandom () {
 
   clearListPictures();
 
-  const photos = await dataPromise;
+  const photos = await downloadedData;
   let resultArray = photos.slice();
   resultArray = shuffle(resultArray).slice(0, 10);
-  pictureBlock.appendChild(createFragmentPhotos(resultArray));
+  renderData(resultArray);
 }
 
 function makeCompare (a,b) {
@@ -74,25 +101,10 @@ async function filterImageDiscussed () {
 
   clearListPictures();
 
-  const photos = await dataPromise;
+  const photos = await downloadedData;
   let resultArray = photos.slice();
   resultArray = resultArray.sort(makeCompare);
-  pictureBlock.appendChild(createFragmentPhotos(resultArray));
+  renderData(resultArray);
 }
 
-function buttonDefaultClickHandler () {
-  filterImageDefault();
-}
-
-function buttonRandomClickHandler () {
-  filterImageRandom();
-}
-
-function buttonDiscussedClickHandler () {
-  filterImageDiscussed();
-}
-
-buttonDefault.addEventListener('click', buttonDefaultClickHandler);
-buttonRandom.addEventListener('click', buttonRandomClickHandler);
-buttonDiscussed.addEventListener('click', buttonDiscussedClickHandler);
-
+export { setFilters };

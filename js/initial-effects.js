@@ -1,5 +1,14 @@
 import { buttonScaleSmallerClickHandler, buttonScaleBiggerClickHandler } from './picture-scale.js';
 import { inputImgEffectsClickHandler } from './picture-effects.js';
+
+const IMAGE_EFFECTS = ['effects__preview--none','effects__preview--chrome','effects__preview--sepia','effects__preview--marvin','effects__preview--phobos','effects__preview--heat'];
+
+const InitialConstants = {
+  SCALE_INITIAL: 1,
+  INPUT_SCALE_INITIAL_VALUE: '100%',
+  SATURATE_INITIAL: '100%',
+};
+
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 
 const buttonScaleSmaller = imgUploadOverlay.querySelector('.scale__control--smaller');
@@ -9,25 +18,19 @@ const inputScale = imgUploadOverlay.querySelector('.scale__control--value');
 const inputImgEffects = imgUploadOverlay.querySelectorAll('.effects__radio');
 const blockSlider = document.querySelector('.img-upload__effect-level');
 
-const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview').children[0];
-
-const SCALE_INITIAL = 1;
-const INPUT_SCALE_INITIAL_VALUE = '100%';
-const SATURATE_INITIAL = '100%';
-
-const imageEffects = ['effects__preview--none','effects__preview--chrome','effects__preview--sepia','effects__preview--marvin','effects__preview--phobos','effects__preview--heat'];
+const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview > img');
 
 function removeClassesImageEffects () {
-  for (let i = 0; i < imageEffects.length; i++) {
-    if(imgUploadPreview.classList.contains(imageEffects[i])) {
-      imgUploadPreview.classList.remove(imageEffects[i]);
+  IMAGE_EFFECTS.forEach((element) => {
+    if(imgUploadPreview.classList.contains(element)) {
+      imgUploadPreview.classList.remove(element);
     }
-  }
+  });
 }
 
 function setInitialScale () {
-  imgUploadPreview.style.transform = `scale(${SCALE_INITIAL})`;
-  inputScale.value = INPUT_SCALE_INITIAL_VALUE;
+  imgUploadPreview.style.transform = `scale(${InitialConstants.SCALE_INITIAL})`;
+  inputScale.value = InitialConstants.INPUT_SCALE_INITIAL_VALUE;
 
   buttonScaleBigger.setAttribute('disabled', 'disabled');
 
@@ -37,15 +40,12 @@ function setInitialScale () {
 
 function setInitialEffects () {
   removeClassesImageEffects ();
-  imgUploadPreview.style.filter = `saturate(${SATURATE_INITIAL})`;
+  imgUploadPreview.style.filter = `saturate(${InitialConstants.SATURATE_INITIAL})`;
   blockSlider.style.opacity = 0;
 }
 
 function setInitialSetting () {
-  //задаёт необходимые настройки масштаба, эффектов, обработчиков, когда открылось окно редактора
-
   setInitialScale();
-
   setInitialEffects();
 
   for(let i = 0; i < inputImgEffects.length; i++) {
