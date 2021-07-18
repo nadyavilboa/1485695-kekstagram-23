@@ -1,13 +1,13 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
 import { checkInputIsActive, inputHashtag, inputComment, inputHashtagInputHandler, inputCommentInputHandler } from './input-validation.js';
 import { setInitialSetting, removeEffectsHandlers } from './initial-effects.js';
-import { formNewPictureSubmitHandler } from './send-form.js';
+import { sendForm } from './api.js';
+import { showErrorForm, showSuccessForm } from './messages.js';
+import { showUserImage } from './file-reader.js';
 
 const body = document.body;
 
-//форма, заполняется при загрузке изображения
 const formNewPicture = document.querySelector('#upload-select-image');
-
 const inputFilePicture = formNewPicture.querySelector('#upload-file');
 
 const popupEditor = formNewPicture.querySelector('.img-upload__overlay');
@@ -18,6 +18,7 @@ function openPopup () {
   body.classList.add('modal-open');
 
   setInitialSetting();
+  showUserImage();
 
   document.addEventListener('keydown', documentKeydownHandler);
   buttonCloseEditor.addEventListener('keydown', buttonCloseEditorKeydownHandler);
@@ -68,6 +69,20 @@ function buttonCloseEditorClickHandler () {
   closePopup();
 }
 
+const onFormSend = () => {
+  showSuccessForm();
+  closePopup();
+};
+
+const onFormFail = () => {
+  showErrorForm();
+};
+
+function formNewPictureSubmitHandler (evt) {
+  evt.preventDefault();
+  sendForm(evt, onFormSend, onFormFail);
+}
+
 buttonCloseEditor.addEventListener('click', buttonCloseEditorClickHandler);
 
-export { inputFilePictureChangeHandler, closePopup };
+export { inputFilePictureChangeHandler };

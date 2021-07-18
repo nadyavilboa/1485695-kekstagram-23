@@ -17,10 +17,10 @@ function createMessage (messageTemplate) {
   return element;
 }
 
-function showMessage(message, buttonClass) {
+function showMessage(message) {
   body.appendChild(createMessage(message));
 
-  const buttonCloseMessage = document.querySelector(buttonClass);
+  const buttonCloseMessage = document.querySelector('.button-close');
   buttonCloseMessage.addEventListener('click', buttonCloseMessageClickHandler);
   document.addEventListener('keydown', documentKeydownHandler);
   document.addEventListener('click', overlayClickHandler);
@@ -29,7 +29,13 @@ function showMessage(message, buttonClass) {
 function closeMessage () {
   const message = body.lastChild;
   message.style.display = 'none';
+
+  const buttonCloseMessage = document.querySelector('.button-close');
+  buttonCloseMessage.removeEventListener('click', buttonCloseMessageClickHandler);
   body.removeChild(message);
+
+  document.removeEventListener('keydown', documentKeydownHandler);
+  document.removeEventListener('click', overlayClickHandler);
 }
 
 function documentKeydownHandler (evt) {
@@ -59,7 +65,6 @@ function overlayClickHandler (evt) {
   }
 }
 
-//сообщение о том, что данные с сервера не получены
 function showErrorLoading () {
   showMessage(messageErrorLoadingTemplate, '.error__button');
 }

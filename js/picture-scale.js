@@ -1,10 +1,3 @@
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const inputScale = imgUploadOverlay.querySelector('.scale__control--value');
-const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview');
-
-const buttonScaleSmaller = imgUploadOverlay.querySelector('.scale__control--smaller');
-const buttonScaleBigger = imgUploadOverlay.querySelector('.scale__control--bigger');
-
 const ScaleConstants = {
   SCALE_STEP: 0.25,
   SCALE_MIN: 0.25,
@@ -12,6 +5,13 @@ const ScaleConstants = {
   INPUT_SCALE_INITIAL_VALUE: '100%',
   PERCENT_COEFFICIENT: 100,
 };
+
+const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const inputScale = imgUploadOverlay.querySelector('.scale__control--value');
+const imgUploadPreview = imgUploadOverlay.querySelector('.img-upload__preview > img');
+
+const buttonScaleSmaller = imgUploadOverlay.querySelector('.scale__control--smaller');
+const buttonScaleBigger = imgUploadOverlay.querySelector('.scale__control--bigger');
 
 inputScale.value = ScaleConstants.INPUT_SCALE_INITIAL_VALUE;
 

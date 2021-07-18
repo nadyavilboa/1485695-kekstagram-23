@@ -4,16 +4,13 @@ import { setComments, buttonShowCommentsClickHandler } from './social-comments.j
 
 const body = document.body;
 
-//модальное окно фотографии
 const blockBigPicture = document.querySelector('.big-picture');
-const bigPicture = blockBigPicture.querySelector('.big-picture__img').children[0];
-
+const bigPicture = blockBigPicture.querySelector('.big-picture__img > img');
 const likesPicture = blockBigPicture.querySelector('.likes-count');
 const descriptionPicture = blockBigPicture.querySelector('.social__caption');
 
 const buttonShowComments = blockBigPicture.querySelector('.social__comments-loader');
 const inputComment = blockBigPicture.querySelector('.social__footer-text');
-
 const buttonClosePhoto = document.querySelector('#picture-cancel');
 
 function documentKeydownHandler (evt) {
@@ -64,4 +61,4 @@ function closeFullPhoto() {
   buttonClosePhoto.removeEventListener('keydown', buttonClosePhotoKeydownHandler);
 }
 
-export {openFullPhoto, closeFullPhoto };
+export { openFullPhoto, closeFullPhoto };
