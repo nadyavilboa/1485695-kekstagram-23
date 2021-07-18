@@ -72,6 +72,8 @@ function changeLevelEffect (levelEffect) {
       imgUploadPreview.style.filter = `brightness(${getHeatLevelValue(levelEffect)})`;
       break;
 
+    default:
+      throw new Error(`Unknown effect id ${effectId}`);
   }
 }
 
