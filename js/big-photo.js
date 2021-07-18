@@ -1,5 +1,4 @@
 import { isEnterEvent, isEscapeEvent } from './utils.js';
-import { downloadedData } from './main.js';
 import { setComments, buttonShowCommentsClickHandler } from './social-comments.js';
 
 const body = document.body;
@@ -33,18 +32,11 @@ function fillPopupBigPhoto (photo) {
   setComments(photo);
 }
 
-async function getDataPhoto (imageId) {
-  const photos = await downloadedData;
-  const pictureData = photos.find((item) => item.id === Number(imageId));
-  fillPopupBigPhoto(pictureData);
-}
-
-function openFullPhoto (image) {
+function openFullPhoto (pictureData) {
   blockBigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 
-  const imageId = image.getAttribute('id');
-  getDataPhoto(imageId);
+  fillPopupBigPhoto(pictureData);
 
   inputComment.setAttribute('disabled', 'disabled');
   document.addEventListener('keydown', documentKeydownHandler);

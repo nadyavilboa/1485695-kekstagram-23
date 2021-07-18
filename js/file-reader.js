@@ -1,4 +1,4 @@
-const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png', 'webp'];
 
 const inputFilePicture = document.querySelector('#upload-file');
 const imgPreview = document.querySelector('.img-upload__preview > img');
@@ -14,6 +14,7 @@ function showUserImage () {
     const reader = new FileReader();
 
     reader.addEventListener('load', () => {
+
       imgPreview.src = reader.result;
     });
 

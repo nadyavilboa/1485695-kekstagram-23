@@ -1,9 +1,8 @@
-import { downloadedData } from './main.js';
 import { renderData } from './rendering-pictures.js';
 import { shuffle } from './utils.js';
 import { debounce } from './utils/debounce.js';
 
-const RERENDER_DELAY = 500;
+const COUNT_RANDOM_PHOTOS = 10;
 
 const pictureBlock = document.querySelector('.pictures');
 
@@ -35,75 +34,68 @@ function clearListPictures () {
   });
 }
 
-function setFilters () {
+function setFilters (data) {
   imgFilters.classList.remove('img-filters--inactive');
   blockButton(buttonDefault);
   unblockButton(buttonRandom);
   unblockButton(buttonDiscussed);
 
-  imgFilters.addEventListener('click', debounce(imgFiltersClickHandler, RERENDER_DELAY));
+  imgFilters.addEventListener('click', debounce((evt) => imgFiltersClickHandler(evt, data)));
 }
 
-function imgFiltersClickHandler (evt) {
+function imgFiltersClickHandler (evt, data) {
   const filterId = evt.target.getAttribute('id');
 
   switch(filterId) {
 
     case 'filter-default':
-      filterImageDefault();
+      filterImageDefault(data);
       break;
 
     case 'filter-random':
-      filterImageRandom();
+      filterImageRandom(data);
       break;
 
     case 'filter-discussed':
-      filterImageDiscussed();
+      filterImageDiscussed(data);
       break;
+
+    default:
+      throw new Error(`Unknown filter id ${filterId}`);
 
   }
 }
 
-async function filterImageDefault () {
+function filterImageDefault (photos) {
   blockButton(buttonDefault);
   unblockButton(buttonRandom);
   unblockButton(buttonDiscussed);
 
   clearListPictures();
-
-  const photos = await downloadedData;
   renderData(photos);
 }
 
-async function filterImageRandom () {
+function filterImageRandom (photos) {
   blockButton(buttonRandom);
   unblockButton(buttonDefault);
   unblockButton(buttonDiscussed);
 
   clearListPictures();
 
-  const photos = await downloadedData;
-  let resultArray = photos.slice();
-  resultArray = shuffle(resultArray).slice(0, 10);
+  const resultArray = shuffle(photos.slice()).slice(0, COUNT_RANDOM_PHOTOS);
   renderData(resultArray);
 }
 
-function makeCompare (a,b) {
-  const firstCommentLength = a.comments.length;
-  const secondCommentLength = b.comments.length;
-  return (firstCommentLength - secondCommentLength) * -1;
-}
-
-async function filterImageDiscussed () {
+function filterImageDiscussed (photos) {
   blockButton(buttonDiscussed);
   unblockButton(buttonDefault);
   unblockButton(buttonRandom);
 
   clearListPictures();
 
-  const photos = await downloadedData;
-  let resultArray = photos.slice();
-  resultArray = resultArray.sort(makeCompare);
+  const resultArray = photos
+    .slice()
+    .sort((a, b) => b.comments.length - a.comments.length);
   renderData(resultArray);
 }
 

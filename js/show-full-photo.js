@@ -1,11 +1,16 @@
 import { openFullPhoto, closeFullPhoto } from './big-photo.js';
-
+const pictures = document.querySelector('.pictures');
 const buttonClosePhoto = document.querySelector('#picture-cancel');
 
-function picturesClickHandler (evt) {
+function picturesClickHandler (evt, data) {
   if (evt.target.className === 'picture__img') {
-    openFullPhoto(evt.target);
-    buttonClosePhoto.addEventListener('click', buttonClosePhotoClickHandler);
+    const imageId = evt.target.getAttribute('id');
+    const pictureData = data.find((item) => item.id === Number(imageId));
+
+    if(pictureData) {
+      openFullPhoto(pictureData);
+      buttonClosePhoto.addEventListener('click', buttonClosePhotoClickHandler);
+    }
   }
 }
 
@@ -15,4 +20,8 @@ function buttonClosePhotoClickHandler (evt) {
   buttonClosePhoto.removeEventListener('click', buttonClosePhotoClickHandler);
 }
 
-export { picturesClickHandler };
+const setBigPictureListener = (data) => {
+  pictures.addEventListener('click', (evt) => picturesClickHandler(evt, data));
+};
+
+export { setBigPictureListener };
